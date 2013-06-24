@@ -1,1 +1,1 @@
-Insert some clever text here.\n
+Side project meshing wardrobe choices and music tastes. WIP.\n
