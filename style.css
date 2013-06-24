@@ -1,0 +1,141 @@
+body {
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 18px;
+	color: #666;
+	background: black url('img/bg01.jpg') fixed center top;
+	transition: background 2s ease;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+h1 {
+	font-size: 4.0em;
+	color: #f5989d;
+	margin: 0 0 15px;
+	text-shadow: 0px 0px 10px #666;
+}
+
+h2 {
+	margin: 0 0 10px;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+fieldset {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+#header {
+	position: absolute;
+	top: 290px;
+	left: auto;
+	right: auto;
+	height: 160px;
+	overflow: hidden;
+}
+
+
+#search input[type="text"] {
+	-moz-appearance: textfield;
+	-moz-user-select: text;
+	color: -moz-fieldtext;
+	cursor: text;
+	text-align: start;
+	text-rendering: optimizelegibility;
+	border: 0;
+	color: #7b8386 !important;
+	font-size: 1.2em;
+	padding: 7px 9px;
+	width: 88%;
+	height: 28px;
+	outline: none;
+	float: left;
+	border-radius: 10px;
+	opacity: 0.9;
+	box-shadow: 0 0 10px;
+	
+}
+
+#search button {
+	float: left;
+	width: 7%;
+	margin-left: 3%;
+	height: 40px;
+	background-color: #f5989d;
+	color: white;
+	font-size: 0.8em;
+}
+
+#search button:hover {
+	cursor: pointer;
+}
+
+#search input[type="text"], #search button {
+	border: 0;
+	border-radius: 10px;
+	box-shadow: 0 0 10px;
+}
+
+#container, header, #search, #results {
+	position: relative;
+	width: 960px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+#header {
+	text-align: center;
+}
+
+#resultscontainer {
+	display: none;
+	position: relative;
+	opacity: 0.85;
+	background: white;
+	height: 100%;
+	padding: 15px 0;
+	top: 200px;
+}
+
+#menu {
+	position: absolute;
+	top: 0;
+	right: 0;
+	text-align: right;
+}
+
+#menu > ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#menu ul > li {
+	margin: 0 10px 0 0;
+	padding: 2px 20px;
+	color: white;
+	float: left;
+	font-size: 0.9em;
+	background-color: #f5989d;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	opacity: 0.85;
+}
+
+#menu ul > li.last {
+	margin-right: 0;
+}
+
+#menu ul > li:hover {
+	cursor: pointer;
+	background-color: red;
+}
