@@ -3,7 +3,7 @@
 
 <head profile="http://gmpg.org/xfn/11">
 <meta charset="utf-8" />
-<title>Wardrobe.FM</title>
+<title>Your Music, Your Style :: Wardrobe.FM</title>
 <meta name="description" content="Wardrobe.FM: Your music, your style" />
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
