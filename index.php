@@ -40,6 +40,7 @@
 				<div>
 					<div id="resultsheading"><h2></h2></div>
 					<div id="resultsbio"><p></p></div>
+					<div id="resultstours"><p></p></div>
 				</div>
 			</div>
 		</div>
