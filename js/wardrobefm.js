@@ -17,20 +17,19 @@ $(document).ready(function() {
     form.on('submit', function(e) {
 	    e.preventDefault(); //stops the default action
 	    artistName = form.find('input[type="text"]').val();
-	    var artistNameString = artistName.split(' ').join('_');
-	    if (artistNameString) {
+	    if (artistName) {
 		    if (results === false) { // has the form been submitted already?
-			 	header.animate({"top": "-=280px"}, "slow"); // moves header to top on first successful search
+			 	header.animate({"top": "-=260px"}, "slow"); // moves header to top on first successful search
 			 	resultsContainer.fadeIn(1000); // Show the results container
 		    }
-		    requestArtist(artistNameString); 	//call to last.fm with artist name
+		    requestArtist(artistName); 	//call to last.fm with artist name
 	    } else {
 		    //error handling
 	    }
     });
 
-    function requestArtist(artistNameString) {
-	    var url = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistNameString + '&autocorrect=1&api_key=a522b32b563f5f3789bd76e86dd69930&format=json';
+    function requestArtist(artistName) {
+	    var url = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistName + '&autocorrect=1&api_key=a522b32b563f5f3789bd76e86dd69930&format=json';
 	    $.ajax({
 			url: url,
 			datatype: 'json',
@@ -69,14 +68,20 @@ $(document).ready(function() {
 			resultsHeading.replaceWith('<h2>' + artistName + '</h2>'); // Heading
 	        resultsBio.replaceWith('<p>' + artistBio + '</p>');
 	        // Lets grab the top 5 tags for this artist
-	        $.each(data.artist.tags.tag, function(i, item) {
-	            html += "<li>" + item.name + "</li>";
-	        });
+	        if (data.artist.tags.tag) {
+		        if (data.artist.tags.tag.length > 1) {
+			        $.each(data.artist.tags.tag, function(i, item) {
+			            html += "<li>" + item.name + "</li>";
+			        });
+		        } else {
+			        html += '<li>' + data.artist.tags.tag.name + '</li>';
+		        }
+	        }
 	        
 	        //getClothes();
 	        
 	        lastFmData.replaceWith('<ul>' + html + '</ul>');
-	        
+	        var artistNameString = artistName.split(' ').join('_');
 	        songkickRequestArtistID(artistNameString); // call to SongKick API
         } else {
 	        lastFmData.replaceWith("<ul>Cannot find an artist by that name. Please search again.</ul>");
@@ -117,11 +122,14 @@ $(document).ready(function() {
     
     function updateTour(response) {
 		var tours = $('#resultstours p'),
-			numEvents = response.resultsPage.totalEntries;
-		if (numEvents !== 0) {
-			tours.replaceWith('<p>' + artistName + ' is currently on tour. There is ' + numEvents + ' upcoming show(s). Visit <a href="#" target="_blank">the SongKick Artist Page</a> for dates and ticket prices</p>');
+			numEvents = response.resultsPage.totalEntries,
+			songkickURL = 'http://www.songkick.com/search?query=' + artistName;
+		if (numEvents === 1) {
+			tours.replaceWith('<p>' + artistName + ' is currently on tour. There is ' + numEvents + ' upcoming show. Visit <a href="' + songkickURL + '" target="_blank">the SongKick Artist Page</a> for dates and ticket prices</p>');
+		} else if (numEvents > 1) {
+			tours.replaceWith('<p>' + artistName + ' is currently on tour. There are ' + numEvents + ' upcoming shows. Visit <a href="' + songkickURL + '" target="_blank">the SongKick Artist Page</a> for dates and ticket prices</p>');
 		} else {
-			tours.replaceWith('<p>' + artistName + ' has no upcoming concerts scheduled. Visit <a href="#" target="_blank">the SongKick Artist Page</a> more information.</p>');
+			tours.replaceWith('<p>' + artistName + ' has no upcoming concerts scheduled. Visit <a href="' + songkickURL + '" target="_blank">the SongKick Artist Page</a> more information.</p>');
 		}
     }
         

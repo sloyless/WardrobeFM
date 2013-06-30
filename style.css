@@ -144,6 +144,7 @@ fieldset {
 	top: 0;
 	right: 0;
 	text-align: right;
+	height: 26px;
 }
 
 #menu > ul {
