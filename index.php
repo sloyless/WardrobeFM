@@ -11,7 +11,7 @@
 
 </head>
 <body>
-	<div id="container">
+	<section id="container">
 		<nav id="menu">
 			<ul>
 				<li><a href="#" title="About Wardrobe.FM">About</a></li>
@@ -30,16 +30,23 @@
 				</form>
 			</div>
 		</header>	
-	</div>
+	</section>
 	<section id="resultscontainer">
 		<div id="results">
-			<div id="resultsheading"><h2></h2></div>
-			<div id="lastfmdata"><ul></ul></div>
+			<div id="resultsLeft">
+				<div id="lastfmdata"><ul></ul></div>
+			</div>
+			<div id="resultsRight">
+				<div>
+					<div id="resultsheading"><h2></h2></div>
+					<div id="resultsbio"><p></p></div>
+				</div>
+			</div>
 		</div>
 	</section>
+		<!-- JS at the bottom for load speed -->
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script src="js/code.js"></script>
-	<!-- JS at the bottom for load speed -->
+	<script src="js/wardrobefm.js"></script>
 </body>
 </html>

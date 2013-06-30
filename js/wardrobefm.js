@@ -1,3 +1,7 @@
+//mysql_db: haggis_wardrobefm
+//mysql_login: haggis_wardrobef
+//mysql_pw: %TdU!q#m(T)^
+
 $(document).ready(function() {
 	var body = $('body'),
 		header = $('#header'),
@@ -20,13 +24,20 @@ $(document).ready(function() {
     };
     
     function updateView(data) {
-		var lastFmData = $('#lastfmdata ul');
+		var lastFmData = $('#lastfmdata ul'),
+			artistInfo = $('#resultsRight div'),
+			documentHeight = $(document).height(), // grabs the document height
+	    	headerHeight = $("#container").height(), // grabs the height of the header
+	    	resultsHeight = documentHeight - headerHeight; // sets the resultscontainer height
+	    resultsContainer.css('height', resultsHeight);
 		results = true; // search has completed!
 		console.log(data);
 	    if (data.error !== 6) { // Last.FM's default error check
     		var artistName = data.artist.name,
+    			artistBio = data.artist.bio.summary,
     			html = '',
     			resultsHeading = $('#resultsheading h2'),
+    			resultsBio = $('#resultsbio p'),
     			pic = data.artist.image[4]['#text']; // The "mega" image;
 
 	        if (pic) { 
@@ -34,12 +45,14 @@ $(document).ready(function() {
 		        body.css('background', 'url(' + pic + ') repeat'); // Sets the body background
 	        }
 	        
-			resultsHeading.replaceWith('<h2>Search results for ' + artistName + '</h2>'); // Heading
-	        
+			resultsHeading.replaceWith('<h2>' + artistName + '</h2>'); // Heading
+	        resultsBio.replaceWith('<p>' + artistBio + '</p>');
 	        // Lets grab the top 5 tags for this artist
 	        $.each(data.artist.tags.tag, function(i, item) {
 	            html += "<li>" + item.name + "</li>";
 	        });
+	        
+	        //getClothes();
 	        
 	        lastFmData.replaceWith('<ul>' + html + '</ul>');
         } else {
@@ -47,6 +60,10 @@ $(document).ready(function() {
 			
         }
     };
+    
+    function getClothes() {
+
+    }
     
     //event binding below
     
