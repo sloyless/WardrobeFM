@@ -8,9 +8,6 @@ $(document).ready(function() {
 		results = false,
 		form = $('#searchform'),
 		resultsContainer = $('#resultscontainer'),
-		resultsHeading = $('#resultsheading h2'),
-    	resultsBio = $('#resultsbio p'),
-		tours = $('#resultstours p'),
 		artistName = null,
 		songkickArtistID = null,
 		songkickAPIKey = 'pMie9zB5boSdFlPK';
@@ -47,6 +44,8 @@ $(document).ready(function() {
     
     function updateView(data) {
 		var lastFmData = $('#lastfmdata ul'),
+			resultsHeading = $('#resultsheading h2'),
+	    	resultsBio = $('#resultsbio p'),
 			artistInfo = $('#resultsRight div'),
 			documentHeight = $(document).height(), // grabs the document height
 	    	headerHeight = $("#container").height(), // grabs the height of the header
@@ -132,7 +131,8 @@ $(document).ready(function() {
     };
     
     function updateTour(response) {
-		var numEvents = response.resultsPage.totalEntries,
+		var tours = $('#resultstours p'),lastFmData = $('#lastfmdata ul'),
+			numEvents = response.resultsPage.totalEntries,
 			songkickURL = 'http://www.songkick.com/search?query=' + artistName;
 		if (numEvents === 1) {
 			tours.replaceWith('<p>' + artistName + ' is currently on tour. There is ' + numEvents + ' upcoming show. Visit <a href="' + songkickURL + '" target="_blank">the SongKick Artist Page</a> for dates and ticket prices</p>');
