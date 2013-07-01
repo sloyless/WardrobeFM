@@ -2,7 +2,7 @@ body {
 	font-family: 'Open Sans Condensed', sans-serif;
 	font-size: 18px;
 	color: #666;
-	background: black url('img/bg01.jpg') fixed center top;
+	background: black url('img/bg01.jpg') fixed center top no-repeat;
 	transition: background 2s ease;
 	width: 100%;
 	margin: 0;
