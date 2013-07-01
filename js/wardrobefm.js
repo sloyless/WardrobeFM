@@ -6,8 +6,11 @@ $(document).ready(function() {
 	var body = $('body'),
 		header = $('#header'),
 		results = false,
-		resultsContainer = $('#resultscontainer'),
 		form = $('#searchform'),
+		resultsContainer = $('#resultscontainer'),
+		resultsHeading = $('#resultsheading h2'),
+    	resultsBio = $('#resultsbio p'),
+		tours = $('#resultstours p'),
 		artistName = null,
 		songkickArtistID = null,
 		songkickAPIKey = 'pMie9zB5boSdFlPK';
@@ -48,17 +51,16 @@ $(document).ready(function() {
 			documentHeight = $(document).height(), // grabs the document height
 	    	headerHeight = $("#container").height(), // grabs the height of the header
 	    	resultsHeight = documentHeight - headerHeight; // sets the resultscontainer height
+	    
 	    resultsContainer.css('height', resultsHeight);
 		results = true; // search has completed!
 		console.log(data);
 	    if (data.error !== 6) { // Last.FM's default error check
     		var artistBio = data.artist.bio.summary,
     			html = '',
-    			resultsHeading = $('#resultsheading h2'),
-    			resultsBio = $('#resultsbio p'),
     			pic = data.artist.image[4]['#text']; // The "mega" image;
-    		artistName = data.artist.name;
-    		var artistNameString = artistName.split(' ').join('_');
+    		
+    		artistName = data.artist.name; // Change artistName to the proper Last.FM autocorrected Arist name
 
 	        if (pic) { 
 		        body.css('background', 'none'); // Clears the default background
@@ -66,28 +68,35 @@ $(document).ready(function() {
 	        }
 	        
 			resultsHeading.replaceWith('<h2>' + artistName + '</h2>'); // Heading
-	        resultsBio.replaceWith('<p>' + artistBio + '</p>');
+	        resultsBio.replaceWith('<p>' + artistBio + '</p>'); // Artist Bio
+	        
 	        // Lets grab the top 5 tags for this artist
-	        if (data.artist.tags.tag) {
-		        if (data.artist.tags.tag.length > 1) {
+	        if (data.artist.tags.tag) { // Do tags exist?
+		        if (data.artist.tags.tag.length > 1) { // Check for more than 1 tag
 			        $.each(data.artist.tags.tag, function(i, item) {
 			            html += "<li>" + item.name + "</li>";
 			        });
-		        } else {
-			        html += '<li>' + data.artist.tags.tag.name + '</li>';
+		        } else { // check for only 1 tag
+			        html = '<li>' + data.artist.tags.tag.name + '</li>';
 		        }
+	        } else {
+		        html = '<li>No tags exist for this artist</li>';
 	        }
 	        
 	        //getClothes();
 	        
 	        lastFmData.replaceWith('<ul>' + html + '</ul>');
-	        var artistNameString = artistName.split(' ').join('_');
+	        
+	        var artistNameString = artistName.split(' ').join('_'); // replace spaces with underscores for SongKick API
 	        songkickRequestArtistID(artistNameString); // call to SongKick API
         } else {
 	        lastFmData.replaceWith("<ul>Cannot find an artist by that name. Please search again.</ul>");
+	        
 			
         }
     };
+    
+    // SongKick API Calls below
     
     function songkickRequestArtistID(artistNameString) {
     	// Songkick's API only allows searches by the Artist ID, so first we must use that API to call the Artist ID text
@@ -95,8 +104,9 @@ $(document).ready(function() {
 	    $.ajax({
 		    url: url,
 		    dataType: 'jsonp',
+		    cache: true,
 		    success: function(data) {
-			    songkickArtistID = data.resultsPage.results.artist[0].id; // Put the Artist ID into a variable
+			    songkickArtistID = data.resultsPage.results.artist[0].id; // Put the Artist ID into a global variable
 			    requestTours(songkickArtistID); // Got the ID, now let's grab the calendar events
 		    },
 		    error: function(response) {
@@ -106,10 +116,11 @@ $(document).ready(function() {
     }
    
     function requestTours(songkickArtistID) {
-	    var newurl = 'http://api.songkick.com/api/3.0/artists/' + songkickArtistID + '/calendar.json?apikey=' + songkickAPIKey + '&jsoncallback=?';
+	    var url = 'http://api.songkick.com/api/3.0/artists/' + songkickArtistID + '/calendar.json?apikey=' + songkickAPIKey + '&jsoncallback=?';
 	    $.ajax({
-		    url: newurl,
+		    url: url,
 		    dataType: 'jsonp',
+		    cache: true,
 		    success: function(response) {
 			    console.log(response);
 			    updateTour(response); // Got the events, let's update the Artist Info sidebar with the concert info
@@ -121,8 +132,7 @@ $(document).ready(function() {
     };
     
     function updateTour(response) {
-		var tours = $('#resultstours p'),
-			numEvents = response.resultsPage.totalEntries,
+		var numEvents = response.resultsPage.totalEntries,
 			songkickURL = 'http://www.songkick.com/search?query=' + artistName;
 		if (numEvents === 1) {
 			tours.replaceWith('<p>' + artistName + ' is currently on tour. There is ' + numEvents + ' upcoming show. Visit <a href="' + songkickURL + '" target="_blank">the SongKick Artist Page</a> for dates and ticket prices</p>');
