@@ -23,7 +23,7 @@
 			<div id="search">
 				<form id="searchform" name="searchform" method="POST" action="/url">
 					<fieldset>
-						<input type="text" name="s" placeholder="Search for a band, album, or song" autocomplete="off" autofocus="autofocus" />
+						<input type="text" name="s" placeholder="Enter your favorite band name" autocomplete="off" autofocus="autofocus" />
 						<button type="submit">Search</button>
 					</fieldset>
 					<!-- submit button -->
@@ -37,7 +37,7 @@
 				<div id="lastfmdata"><ul></ul></div>
 			</div>
 			<div id="resultsRight">
-				<div>
+				<div class="artistbio">
 					<div id="resultsheading"><h2></h2></div>
 					<div id="resultsbio"><p></p></div>
 					<div id="resultstours"><p></p></div>

@@ -1,13 +1,10 @@
-//mysql_db: haggis_wardrobefm
-//mysql_login: haggis_wardrobef
-//mysql_pw: %TdU!q#m(T)^
-
 $(document).ready(function() {
 	var body = $('body'),
 		header = $('#header'),
 		results = false,
 		form = $('#searchform'),
 		resultsContainer = $('#resultscontainer'),
+		artistInfo = $('#resultsRight div'),
 		artistName = null,
 		songkickArtistID = null,
 		songkickAPIKey = 'pMie9zB5boSdFlPK';
@@ -23,8 +20,6 @@ $(document).ready(function() {
 			 	resultsContainer.fadeIn(1000); // Show the results container
 		    }
 		    requestArtist(artistName); 	//call to last.fm with artist name
-	    } else {
-		    //error handling
 	    }
     });
 
@@ -46,8 +41,7 @@ $(document).ready(function() {
     function updateView(data) {
 		var lastFmData = $('#lastfmdata ul'),
 			resultsHeading = $('#resultsheading h2'),
-	    	resultsBio = $('#resultsbio p'),
-			artistInfo = $('#resultsRight div'),
+			resultsBio = $('#resultsbio p'),
 			documentHeight = $(document).height(), // grabs the document height
 	    	headerHeight = $("#container").height(), // grabs the height of the header
 	    	resultsHeight = documentHeight - headerHeight; // sets the resultscontainer height
@@ -55,6 +49,7 @@ $(document).ready(function() {
 	    resultsContainer.css('height', resultsHeight);
 		results = true; // search has completed!
 		console.log(data);
+		
 	    if (data.error !== 6) { // Last.FM's default error check
     		var artistBio = data.artist.bio.summary,
     			html = '',
@@ -68,6 +63,7 @@ $(document).ready(function() {
 	        }
 	        
 			resultsHeading.replaceWith('<h2>' + artistName + '</h2>'); // Heading
+	        artistInfo.fadeIn('slow');
 	        resultsBio.replaceWith('<p>' + artistBio + '</p>'); // Artist Bio
 	        
 	        // Lets grab the top 5 tags for this artist
@@ -90,9 +86,9 @@ $(document).ready(function() {
 	        var artistNameString = artistName.split(' ').join('_'); // replace spaces with underscores for SongKick API
 	        songkickRequestArtistID(artistNameString); // call to SongKick API
         } else {
+	        artistInfo.fadeOut('slow');
 	        lastFmData.replaceWith("<ul>Cannot find an artist by that name. Please search again.</ul>");
 	        
-			
         }
     };
     
@@ -105,12 +101,12 @@ $(document).ready(function() {
 		    url: url,
 		    dataType: 'jsonp',
 		    cache: true,
-		    success: function(data) {
+		    success: function(response) {
 			    songkickArtistID = data.resultsPage.results.artist[0].id; // Put the Artist ID into a global variable
 			    requestTours(songkickArtistID); // Got the ID, now let's grab the calendar events
 		    },
 		    error: function(response) {
-			    console.log('Songkick Artist Search API error: ', data);
+			    console.log('Songkick Artist Search API error: ', response);
 		    }
 	    })
     }
@@ -143,7 +139,8 @@ $(document).ready(function() {
 			tours.replaceWith('<p>' + artistName + ' has no upcoming concerts scheduled. Visit <a href="' + songkickURL + '" target="_blank">the SongKick Artist Page</a> more information.</p>');
 		}
     }
-        
+    
+    // mySQL database integration
     function getClothes() {
 		var url = 'dbconnect.php',
 			html = '',
@@ -151,16 +148,15 @@ $(document).ready(function() {
 		$.ajax({
 			url: url,
 			dataType: 'json',
-			success: function(json) {
-				console.log(json);
-				$.each(json, function(i, item) {
-					html += '<img src=' + json.items[0].Image + ' />';
-				});
-				
-				lastFmData.append('<p>' + html + '</p>');
+			success: function(wardrobeDB) {
+				console.log(wardrobeDB);
+				for (n=0; n<wardrobeDB.items.length; n++) {
+					html += '<p><img src=' + wardrobeDB.items[n].Image + ' /></p>';
+				}
+				lastFmData.append(html);
 			},
-			error: function(json) {
-				console.log('DB Error: ', json);
+			error: function(wardrobeDB) {
+				console.log('DB Error: ', wardrobeDB);
 			}
 		})
     }

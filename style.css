@@ -100,7 +100,7 @@ fieldset {
 #resultscontainer {
 	display: none;
 	position: relative;
-	opacity: 0.9;
+	opacity: 0.95;
 	background: white;
 	overflow: scroll;
 }
@@ -124,13 +124,17 @@ fieldset {
 	position: absolute;
 	right: 0;
 	display: block;
-	background-color: #f5989d;
-	color: white;
-	width: 200px;
+	width: 250px;
+}
+
+#resultsRight .artistbio {
+	display: none;
+	padding: 10px 25px;
 	border: 1px solid silver;
 	box-shadow: 0 0 10px silver;
-	padding: 10px 25px;
 	font-size: 0.9em;
+	background-color: #f5989d;
+	color: white;	
 }
 
 #resultsRight a {
@@ -177,9 +181,11 @@ fieldset {
 }
 
 #lastfmdata p {
-	width: 250px;
-	height: 250px;
+	width: 200px;
+	height: 200px;
+	border: 5px solid silver;
 	border-radius: 125px;
 	overflow: hidden;
-	
+	float: left;
+	margin-right: 30px;
 }
