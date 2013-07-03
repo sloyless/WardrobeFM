@@ -175,3 +175,11 @@ fieldset {
 	cursor: pointer;
 	background-color: red;
 }
+
+#lastfmdata p {
+	width: 250px;
+	height: 250px;
+	border-radius: 125px;
+	overflow: hidden;
+	
+}

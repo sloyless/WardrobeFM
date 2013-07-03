@@ -32,7 +32,8 @@ $(document).ready(function() {
 	    var url = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistName + '&autocorrect=1&api_key=a522b32b563f5f3789bd76e86dd69930&format=json';
 	    $.ajax({
 			url: url,
-			datatype: 'json',
+			datatype: 'jsonp',
+			cache: true,
 			success: function(response) {
 				updateView(response);
 			},
@@ -82,7 +83,7 @@ $(document).ready(function() {
 		        html = '<li>No tags exist for this artist</li>';
 	        }
 	        
-	        //getClothes();
+	        getClothes();
 	        
 	        lastFmData.replaceWith('<ul>' + html + '</ul>');
 	        
@@ -144,6 +145,23 @@ $(document).ready(function() {
     }
         
     function getClothes() {
-
+		var url = 'dbconnect.php',
+			html = '',
+			lastFmData = $('#lastfmdata');
+		$.ajax({
+			url: url,
+			dataType: 'json',
+			success: function(json) {
+				console.log(json);
+				$.each(json, function(i, item) {
+					html += '<img src=' + json.items[0].Image + ' />';
+				});
+				
+				lastFmData.append('<p>' + html + '</p>');
+			},
+			error: function(json) {
+				console.log('DB Error: ', json);
+			}
+		})
     }
 });
