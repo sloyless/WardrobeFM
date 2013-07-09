@@ -4,5 +4,7 @@ $statement=$pdo->prepare("SELECT * FROM items");
 $statement->execute();
 $results=$statement->fetchAll(PDO::FETCH_ASSOC);
 
-echo json_encode(array('items' => $results));
+$items = array('items' => $results);
+
+echo json_encode($items);
 ?>

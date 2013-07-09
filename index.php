@@ -9,32 +9,36 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="style.css" />
 
+<!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
 </head>
 <body>
-	<section id="container">
+	<header id="header">
 		<nav id="menu">
 			<ul>
 				<li><a href="#" title="About Wardrobe.FM">About</a></li>
 				<li class="last"><a href="#" title="Get help">Help</a></li>
 			</ul>
 		</nav>
-		<header id="header">
+		<div id="searchContainer">
 			<h1>Wardrobe.FM</h1>
 			<div id="search">
 				<form id="searchform" name="searchform" method="POST" action="/url">
 					<fieldset>
-						<input type="text" name="s" placeholder="Enter your favorite band name" autocomplete="off" autofocus="autofocus" />
+						<input type="text" name="s" placeholder="Enter your favorite band name" autocomplete="off" autofocus />
 						<button type="submit">Search</button>
 					</fieldset>
 					<!-- submit button -->
 				</form>
 			</div>
-		</header>	
-	</section>
+		</div>	
+	</header>
 	<section id="resultscontainer">
 		<div id="results">
 			<div id="resultsLeft">
-				<div id="lastfmdata"><ul></ul></div>
+				<div id="items"><ul></ul></div>
 			</div>
 			<div id="resultsRight">
 				<div class="artistbio">
@@ -45,7 +49,8 @@
 			</div>
 		</div>
 	</section>
-		<!-- JS at the bottom for load speed -->
+	<div class="modal"><!-- AJAX Loading modal --></div>
+	<!-- JS at the bottom for load speed -->
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="js/wardrobefm.js"></script>

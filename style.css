@@ -1,3 +1,26 @@
+/* CSS Resets */
+article, aside, details, figcaption, figure, footer, header,hgroup,menu,nav,section { display:block; }
+
+input, select {
+    vertical-align:middle;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+hr {
+    display:block;
+    height:1px;
+    border:0;   
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+/* Begin page styles */
+
 body {
 	font-family: 'Open Sans Condensed', sans-serif;
 	font-size: 18px;
@@ -17,9 +40,7 @@ h1 {
 	text-shadow: 0px 0px 10px #666;
 }
 
-h2 {
-	margin: 0 0 10px;
-}
+h2 { margin: 0 0 10px; }
 
 a {
 	text-decoration: none;
@@ -32,7 +53,18 @@ fieldset {
 	margin: 0;
 }
 
+#header, #searchContainer, #search, #results {
+	position: relative;
+	width: 960px;
+	margin: 0 auto;
+}
+
 #header {
+	height: 270px;
+	text-align: center;
+}
+
+#searchContainer {
 	position: absolute;
 	top: 290px;
 	left: auto;
@@ -41,7 +73,6 @@ fieldset {
 	overflow: hidden;
 }
 
-
 #search input[type="text"] {
 	-moz-appearance: textfield;
 	-moz-user-select: text;
@@ -49,7 +80,6 @@ fieldset {
 	cursor: text;
 	text-align: start;
 	text-rendering: optimizelegibility;
-	border: 0;
 	color: #7b8386 !important;
 	font-size: 1.2em;
 	padding: 7px 9px;
@@ -57,9 +87,7 @@ fieldset {
 	height: 28px;
 	outline: none;
 	float: left;
-	border-radius: 10px;
 	opacity: 0.9;
-	box-shadow: 0 0 10px;
 	
 }
 
@@ -73,9 +101,7 @@ fieldset {
 	font-size: 0.8em;
 }
 
-#search button:hover {
-	cursor: pointer;
-}
+#search button:hover { cursor: pointer; }
 
 #search input[type="text"], #search button {
 	border: 0;
@@ -83,19 +109,6 @@ fieldset {
 	box-shadow: 0 0 10px;
 }
 
-#container, header, #search, #results {
-	position: relative;
-	width: 960px;
-	margin: 0 auto;
-}
-
-#container {
-	height: 200px;
-}
-
-#header {
-	text-align: center;
-}
 
 #resultscontainer {
 	display: none;
@@ -105,19 +118,16 @@ fieldset {
 	overflow: scroll;
 }
 
-#resultscontainer a {
-	color: #999;
-}
+#resultscontainer a { color: #999; }
 
-#resultscontainer a:hover {
-	text-decoration: underline;
-}
+#resultscontainer a:hover { text-decoration: underline; }
 
 #resultsLeft {
 	display: block;
 	position: absolute;
 	left: 0;
 	width: 700px;
+	margin: 25px 0;
 }
 
 #resultsRight {
@@ -126,6 +136,8 @@ fieldset {
 	display: block;
 	width: 250px;
 }
+
+#resultsRight > div { display: none; }
 
 #resultsRight .artistbio {
 	display: none;
@@ -137,9 +149,7 @@ fieldset {
 	color: white;	
 }
 
-#resultsRight a {
-	color: red;
-}
+#resultsRight a { color: red; }
 
 /* Menu */
 
@@ -151,7 +161,7 @@ fieldset {
 	height: 26px;
 }
 
-#menu > ul {
+#menu > ul, #items > ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -171,16 +181,14 @@ fieldset {
 	opacity: 0.85;
 }
 
-#menu ul > li.last {
-	margin-right: 0;
-}
+#menu ul > li.last { margin-right: 0; }
 
-#menu ul > li:hover {
+#menu ul > li.item:hover {
 	cursor: pointer;
 	background-color: red;
 }
 
-#lastfmdata p {
+#items ul > li.item {
 	width: 200px;
 	height: 200px;
 	border: 5px solid silver;
@@ -189,3 +197,23 @@ fieldset {
 	float: left;
 	margin-right: 30px;
 }
+
+/* AJAX Loading modal */
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 320px 
+                no-repeat;
+}
+
+body.loading { overflow: hidden; }
+
+body.loading .modal { display: block; }
