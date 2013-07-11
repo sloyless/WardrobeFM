@@ -156,19 +156,31 @@ $(document).ready(function() {
     
     // mySQL database integration
     function getClothes(fmTags) {
-		var url = 'dbconnect.php'; // MySQL db connection
+		var url = 'dbconnect.php',
+			unsortedArray = [],
+			displayArray = [],
+			html = ''; // MySQL db connection
 		
 		$.ajax({
 			url: url,
 			dataType: 'json',
 			success: function(dbItems) {
 				console.log(dbItems);
-				for (i=0; i<dbItems.items.length; i++) {
+				for (var i=0; i<dbItems.items.length; i++) { // loop through db items
 					var dbTags = [dbItems.items[i].Tag1, dbItems.items[i].Tag2, dbItems.items[i].Tag3, dbItems.items[i].Tag4, dbItems.items[i].Tag5],
-						dbImage = [dbItems.items[i].Image];
-						
-					compareArrays(fmTags, dbTags, dbImage);
+						dbImage = dbItems.items[i].Image,
+						unsortedItems = compareArrays(fmTags, dbTags, dbImage); // Compares the db to lastFM tags 
 				}
+				console.log('Unsorted: ', unsortedArray);
+				displayArray = unsortedArray.sort(function(a,b) {
+					return parseInt(a.score,10) - parseInt(b.score,10);
+				})
+				console.log('Sorted: ', displayArray);
+				
+				for (var i=0; i<displayArray.length; i++) {
+					html += '<li class="item"><img src=' + displayArray[i].dbImage + ' /></li>';
+				}
+				dbItemsContainer.append(html);
 			},
 			error: function(dbItems) {
 				console.log('DB Error: ', dbItems);
@@ -177,15 +189,14 @@ $(document).ready(function() {
     }
     
     function compareArrays(fmTags, dbTags, dbImage) {
-		var html = '',
-			score = 0;
+		var score = 0;
 			
 			console.log(fmTags);
 			console.log(dbTags);
 			console.log(dbImage);
 		
 		if (fmTags.length > 1) { // Only run the db query for the number of tags Last.FM outputted
-			for (n=0; n<fmTags.length; n++) {
+			for (var n=0; n<fmTags.length; n++) {
 			    if ($.inArray(dbTags[n], fmTags) === 0) {
 					console.log('Tag #' + n + ': ' + dbTags[n] + ' is the first item in the array!');
 					score += 40; // Higher score for immediate first tag match
@@ -204,32 +215,23 @@ $(document).ready(function() {
 				} else {
 					console.log('No matches for ' + dbTags[n]);
 				}
-				
 			}
 			console.log(score);
 			
-			switch (true) {
-				case score == 100:
-					html += '<li class="item"><img src=' + dbImage + ' /></li>';
-					break;
-				case score <=95 && score >= 55:
-					html += '<li class="item"><img src=' + dbImage + ' /></li>';
-					break;
-				case score <=50 && score >= 25:
-					html += '<li class="item"><img src=' + dbImage + ' /></li>';
-					break;
-				case score <=20 && score >= 0:
-					html += '<li class="item"><img src=' + dbImage + ' /></li>';
-					break;
-				default:
-					break;
+			if (score != 0) {
+				
+				var item = {score: score, image: dbImage};
+				
+				console.log('Item: ', item);
+				return item;
 			}
-			
-			dbItemsContainer.append(html);
-			
 		} else {
-			if (fmTags === dbTags) {
+			if (fmTags == dbTags) {
 				console.log('Only 1 tag');
+				
+				score = 100;
+				item = [score, dbImage];
+				return item;
 			}
 		}
     }
