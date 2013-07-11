@@ -26,9 +26,10 @@ $(document).ready(function() {
 		    }
 		    var artistNameString = artistName.split(' ').join('_'); // replace spaces with underscores for SongKick API;
 		    
-		    artistInfo.fadeOut('fast');
+		    dbItemsContainer.html(''); // Reset the results
+		    artistInfo.fadeOut('fast'); // Fade out the artist sidebar
 		    songkickArtistID(artistNameString); // call to SongKick API
-		    requestArtist(artistName); 	//call to last.fm with artist name
+		    requestArtist(artistName); 	// call to last.fm with artist name
 	    }
     });
 	
@@ -182,10 +183,8 @@ $(document).ready(function() {
 			console.log(fmTags);
 			console.log(dbTags);
 			console.log(dbImage);
-			
 		
-		if (fmTags.length > 1) {
-			// Run each tag through the database json and output the first image that matches the first tag, then second, then third and so on.
+		if (fmTags.length > 1) { // Only run the db query for the number of tags Last.FM outputted
 			for (n=0; n<fmTags.length; n++) {
 			    if ($.inArray(dbTags[n], fmTags) === 0) {
 					console.log('Tag #' + n + ': ' + dbTags[n] + ' is the first item in the array!');
@@ -207,11 +206,25 @@ $(document).ready(function() {
 				}
 				
 			}
-			if (score === 100) {
-				html += '<li class="item"><img src=' + dbImage + ' /></li>';	
+			console.log(score);
+			
+			switch (true) {
+				case score == 100:
+					html += '<li class="item"><img src=' + dbImage + ' /></li>';
+					break;
+				case score <=95 && score >= 55:
+					html += '<li class="item"><img src=' + dbImage + ' /></li>';
+					break;
+				case score <=50 && score >= 25:
+					html += '<li class="item"><img src=' + dbImage + ' /></li>';
+					break;
+				case score <=20 && score >= 0:
+					html += '<li class="item"><img src=' + dbImage + ' /></li>';
+					break;
+				default:
+					break;
 			}
 			
-			console.log(score);
 			dbItemsContainer.append(html);
 			
 		} else {
