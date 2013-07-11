@@ -169,16 +169,17 @@ $(document).ready(function() {
 				for (var i=0; i<dbItems.items.length; i++) { // loop through db items
 					var dbTags = [dbItems.items[i].Tag1, dbItems.items[i].Tag2, dbItems.items[i].Tag3, dbItems.items[i].Tag4, dbItems.items[i].Tag5],
 						dbImage = dbItems.items[i].Image,
-						unsortedItems = compareArrays(fmTags, dbTags, dbImage); // Compares the db to lastFM tags 
+						unsortedItems = compareArrays(fmTags, dbTags, dbImage); // Compares the db to lastFM tags
+						unsortedArray.push(unsortedItems);
 				}
 				console.log('Unsorted: ', unsortedArray);
 				displayArray = unsortedArray.sort(function(a,b) {
-					return parseInt(a.score,10) - parseInt(b.score,10);
+					return parseInt(b.score,10) - parseInt(a.score,10);
 				})
 				console.log('Sorted: ', displayArray);
 				
 				for (var i=0; i<displayArray.length; i++) {
-					html += '<li class="item"><img src=' + displayArray[i].dbImage + ' /></li>';
+					html += '<li class="item"><img src=' + displayArray[i].image + ' /></li>';
 				}
 				dbItemsContainer.append(html);
 			},
