@@ -69,7 +69,7 @@ $(document).ready(function() {
 		console.log('Last.FM API: ', data);
 		
 	    if (data && data.error !== 6) { // Last.FM's default error check
-    		artistName = data.artist.name; // Change artistName to the proper Last.FM autocorrected Arist name
+    		artistName = data.artist.name; // Change artistName var to the proper Last.FM autocorrected Arist name
     		
     		var fmTags = data.artist.tags.tag,
     			artistBio = data.artist.bio.summary,    			
@@ -89,11 +89,11 @@ $(document).ready(function() {
 	        if (fmTags) { // Do tags exist?
 		        if (fmTags.length > 1) { // Check for more than 1 tag
 					var fmTagsArray = [];
-					for (n=0; n<fmTags.length; n++) {
-						fmTagsArray.push(fmTags[n].name); // simplifying the array
-					}
+					$.each(fmTags, function(index, value){
+						fmTagsArray.push(this.name); // simplifying the array
+					});
 		        } else { // check for only 1 tag
-			        fmTagsArray = fmTags.name;
+			        fmTagsArray = [fmTags.name];
 		        }
 		        getClothes(fmTagsArray); // run the mysql database search
 	        }
@@ -156,30 +156,40 @@ $(document).ready(function() {
     
     // mySQL database integration
     function getClothes(fmTags) {
-		var url = 'dbconnect.php',
+		var url = 'dbconnect.php', // MySQL db connection
 			unsortedArray = [],
 			displayArray = [],
-			html = ''; // MySQL db connection
+			html = ''; 
 		
 		$.ajax({
 			url: url,
 			dataType: 'json',
 			success: function(dbItems) {
 				console.log(dbItems);
-				for (var i=0; i<dbItems.items.length; i++) { // loop through db items
-					var dbTags = [dbItems.items[i].Tag1, dbItems.items[i].Tag2, dbItems.items[i].Tag3, dbItems.items[i].Tag4, dbItems.items[i].Tag5],
-						dbImage = dbItems.items[i].Image,
-						unsortedItems = compareArrays(fmTags, dbTags, dbImage); // Compares the db to lastFM tags
-						unsortedArray.push(unsortedItems);
-				}
-				console.log('Unsorted: ', unsortedArray);
-				displayArray = unsortedArray.sort(function(a,b) {
-					return parseInt(b.score,10) - parseInt(a.score,10);
-				})
-				console.log('Sorted: ', displayArray);
 				
-				for (var i=0; i<displayArray.length; i++) {
-					html += '<li class="item"><img src=' + displayArray[i].image + ' /></li>';
+				$.each(dbItems.items, function(index, value){ // loop through db items
+					var dbTags = [this.Tag1, this.Tag2, this.Tag3, this.Tag4, this.Tag5],
+						dbImage = this.Image,
+						unsortedItems = compareArrays(fmTags, dbTags, dbImage); // Compares the db to lastFM tags
+						
+					if (unsortedItems !== undefined) {
+						unsortedArray.push(unsortedItems);
+					}
+				});
+				
+				if (typeof unsortedArray !== undefined && unsortedArray.length > 0) {
+					
+					displayArray = unsortedArray.sort(function(a,b) { // Sort the array by highest score
+						return parseInt(b.score,10) - parseInt(a.score,10);
+					});
+					
+					console.log('Sorted array: ', displayArray);
+					
+					$.each(displayArray, function(index, value){ // Loop through sorted results and put them on the page
+						html += '<li class="item"><img src=' + this.image + ' /></li>';
+					});
+				} else {
+					html += '<p>No items found in the database matching this artist. Please enter another artist or try again later.</p>';
 				}
 				dbItemsContainer.append(html);
 			},
@@ -198,7 +208,7 @@ $(document).ready(function() {
 		
 		if (fmTags.length > 1) { // Only run the db query for the number of tags Last.FM outputted
 			for (var n=0; n<fmTags.length; n++) {
-			    if ($.inArray(dbTags[n], fmTags) === 0) {
+			    if ($.inArray(dbTags[n], fmTags) === 0) { // Do the tags in the first position of both arrays match?
 					console.log('Tag #' + n + ': ' + dbTags[n] + ' is the first item in the array!');
 					score += 40; // Higher score for immediate first tag match
 				} else if ($.inArray(dbTags[n], fmTags) === 1) {
@@ -218,20 +228,15 @@ $(document).ready(function() {
 				}
 			}
 			console.log(score);
-			
-			if (score != 0) {
-				
+			if (score !== 0) {
 				var item = {score: score, image: dbImage};
-				
-				console.log('Item: ', item);
 				return item;
 			}
 		} else {
-			if (fmTags == dbTags) {
+			if ($.inArray(dbTags[0], fmTags) === 0) {
 				console.log('Only 1 tag');
-				
 				score = 100;
-				item = [score, dbImage];
+				var item = {score: score, image: dbImage};
 				return item;
 			}
 		}
