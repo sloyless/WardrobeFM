@@ -51,7 +51,7 @@
 	</section>
 	<div class="modal"><!-- AJAX Loading modal --></div>
 	<!-- JS at the bottom for load speed -->
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="js/wardrobefm.js"></script>
 </body>
