@@ -7,7 +7,8 @@
 <meta name="description" content="Wardrobe.FM: Your music, your style" />
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="css/normalize.css" />
+<link rel="stylesheet" href="css/style.css" />
 
 <!--[if IE]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -27,13 +28,13 @@
 			<div id="search">
 				<form id="searchform" name="searchform" method="POST" action="/url">
 					<fieldset>
-						<input type="text" name="s" placeholder="Enter your favorite band name" autocomplete="off" autofocus />
+						<input type="text" name="s" placeholder="Enter your favorite band name" autocomplete="off" autofocus required aria-required="true" />
 						<button type="submit">Search</button>
 					</fieldset>
 					<!-- submit button -->
 				</form>
 			</div>
-		</div>	
+		</div>
 	</header>
 	<section id="resultscontainer">
 		<div id="results">
@@ -53,6 +54,7 @@
 	<!-- JS at the bottom for load speed -->
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="js/vendor/modernizr-2.8.3.js"></script>
 	<script src="js/wardrobefm.js"></script>
 </body>
 </html>

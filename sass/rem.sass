@@ -1,0 +1,47 @@
+// adapted from http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
+// added default to px value if value is unitless
+// mixin is to be used with sites supporting the body font-size 62.5% trick. This converts pixelcount into rems (root ems), so that browsers that don't support ems can fall back to pixels, and browsers that do but won't scale pixel-based fonts (old IE) can have scalable text. This allows web developers to code in pixels while retaining the flexibility of ems without the frustration of guessing at sizes. With this methodology, both are (or should be) identical. This also allows coding in rems.
+
+@function parseInt($n)
+    @return $n / ($n * 0 + 1)
+
+=rem($property, $values, $important:"")
+    $px: ()
+    $rem: ()
+
+    $impString: ""
+    @if $important == "important" 
+        || $important == "!important" 
+        || $important == true
+        $impString: "!important"
+
+    @each $value in $values
+
+        @if $value == 0 or $value == auto
+            $px: append($px , $value)
+            $rem: append($rem, $value)
+        
+        @else
+            $unit: unit($value)
+            $val: parseInt($value)
+          
+            @if $unit == "%"
+                @warn "ERROR: You can't use percentage values with the +rem function."
+                
+            @if $unit == "px"
+                $px: append($px,  $value)
+                $rem: append($rem, ($val / 10 + rem))
+          
+            @if $unit == "rem"
+                $px: append($px,  ($val * 10 + px))
+                $rem: append($rem, $value)
+
+            @if $unit == ""
+                $px: append($px,  $value + px)
+                $rem: append($rem, ($val / 10 + rem))
+  
+    @if $px == $rem
+        #{$property}: $px #{$impString}
+    @else
+        #{$property}: $px #{$impString}
+        #{$property}: $rem #{$impString}
