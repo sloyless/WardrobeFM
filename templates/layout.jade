@@ -1,0 +1,24 @@
+doctype html
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html ng-app> <!--<![endif]-->
+
+head
+  include common/document_head
+
+block body
+  body
+    block header
+      include common/header
+
+    section(data-role="content")
+      block landing_page_template
+
+        section(data-area="footer_modules")
+          block footer_modules
+
+      block footer
+        include common/document_footer
+
+    block scripts
+      include common/script_inclusions
+</html>
