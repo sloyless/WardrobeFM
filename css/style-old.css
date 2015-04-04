@@ -91,17 +91,33 @@ ul.nolist {
   width: auto; }
 
 /* Begin page styles */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0; }
+
 #header, #searchContainer, #search, #results {
   position: relative;
   width: 960px;
   margin: 0 auto; }
 
 #header {
-  height: 30vh;
+  height: 100vh;
   min-height: 315px;
   text-align: center; }
 
-#search input[type="text"], #search button {
+#searchContainer {
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  overflow: hidden; }
+
+#search input[type="text"],
+#search button {
   -webkit-border-radius: 10px;
   -ms-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -139,6 +155,7 @@ ul.nolist {
     cursor: pointer; }
 
 #resultscontainer {
+  display: none;
   position: relative;
   opacity: 0.9;
   background: white;
@@ -205,9 +222,8 @@ body.loading {
   body.loading .modal {
     display: block; }
 
-[data-module="artist-bio"] {
+.artistbio {
   width: 100%;
-  height: 100%;
-  display: block; }
+  height: 100%; }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=style-old.css.map */

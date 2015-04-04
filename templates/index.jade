@@ -1,8 +1,18 @@
-extends /layout
+extends ./layout
 
-block landing_page_template
+block page-meta
+    title Home Page! - WardrobeFM
 
-    div
-        input(type="text" ng-model="yourName" placeholder="Enter a name here")
-        hr
-        h1 Hello {{yourName}}!
+block content
+    section(id="resultscontainer")
+        div(id="results")
+            include modules/artist-bio
+            
+            div(id="resultsRight")
+                div.artistbio
+                    div(id="resultsheading")
+                        h2 
+                    div(id="resultsbio")
+                        p 
+                    div(id="resultstours")
+                        p 

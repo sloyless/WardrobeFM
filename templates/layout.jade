@@ -1,24 +1,23 @@
 doctype html
-<!--[if IE 9 ]><html class="ie9"><![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html ng-app> <!--<![endif]-->
+html(
+  ng-app="artistBio"
+  lang="en" 
+  xmlns:og="http://ogp.me/ns#" 
+  xmlns:fb="http://www.facebook.com/2008/fbml"
+)
+  head
+    include common/document_head
 
-head
-  include common/document_head
+  block body
+    body(ng-controller="artistListController as artistList")
+      block header
+        include common/header
 
-block body
-  body
-    block header
-      include common/header
+      section(data-role="content")
+        block content
 
-    section(data-role="content")
-      block landing_page_template
+        block footer
+          include common/document_footer
 
-        section(data-area="footer_modules")
-          block footer_modules
-
-      block footer
-        include common/document_footer
-
-    block scripts
-      include common/script_inclusions
-</html>
+      block scripts
+        include common/script_inclusions

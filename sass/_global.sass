@@ -66,30 +66,18 @@ ul.nolist
 
 /* Begin page styles */
 
-fieldset
-  border: none
-  padding: 0
-  margin: 0
-
 #header, #searchContainer, #search, #results
   position: relative
   width: $siteWidth
   margin: 0 auto
 
 #header
-  height: 100vh
+  height: 30vh
   min-height: 315px
   text-align: center
 
-#searchContainer
-  +vendor_prefix(transform, translateY(-50%))
-  position: absolute
-  top: 50%
-  overflow: hidden
-
 #search
-  input[type="text"],
-  button
+  input[type="text"], button
     +vendor_prefix(border-radius, 10px)
     +vendor_prefix(box-shadow, 0 0 10px)
     +inline-block
@@ -119,7 +107,6 @@ fieldset
       cursor: pointer
 
 #resultscontainer
-  display: none
   position: relative
   opacity: 0.9
   background: white
@@ -131,51 +118,6 @@ fieldset
 
     &:hover
       text-decoration: underline
-
-  #resultsLeft
-    width: 700px
-
-    #items
-      +rem(margin, 25px 0 0)
-
-      ul > li.item
-        +rem(margin, 0 30px 30px 0)
-        +vendor_prefix(border-radius, 125px)
-        +inline-block
-        width: 200px
-        height: 200px
-        border: 5px solid silver
-        overflow: hidden
-
-        img
-          width: 100%
-          height: auto
-
-        &:last-child,
-        &:nth-child(3n+3)
-          margin-right: 0
-
-  #resultsRight
-    +vendor_prefix(transform, translateX(87%))
-    position: fixed
-    left: 50%
-    top: 30vh
-    width: 250px
-
-    > div
-      display: none
-
-    .artistbio
-      +rem(padding, 10px 25px)
-      +rem(font-size, 16px)
-      +vendor_prefix(box-shadow, 0 0 10px silver)
-      display: none
-      border: 1px solid silver
-      background-color: $pink
-      color: white
-
-    a
-      color: red
 
 /* Menu */
 
