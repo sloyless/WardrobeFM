@@ -5,22 +5,5 @@ header(id="header")
                 a(href="#" title="About Wardrobe.FM") About
             li.last
                 a(href="#" title="Get help") Help
-    div(id="searchContainer")
-        h1 Wardrobe.FM
-        div(id="search")
-            form(
-                id="searchform" 
-                name="searchform" 
-                ng-submit="artistList.addArtist()"
-            )
-                input(
-                    type="text" 
-                    name="s" 
-                    placeholder="Enter your favorite band name" 
-                    autocomplete="off" 
-                    autofocus 
-                    required 
-                    aria-required="true"
-                    ng-model="artistList.artistText"
-                )
-                button(type="submit") Search
+    h1 Wardrobe.FM
+    block searchContainer

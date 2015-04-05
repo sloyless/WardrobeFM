@@ -20,14 +20,20 @@
           <li class="last"><a href="#" title="Get help">Help</a></li>
         </ul>
       </nav>
-      <div id="searchContainer">
-        <h1>Wardrobe.FM</h1>
+      <h1>Wardrobe.FM</h1>
+      <div data-module="artist-search" id="searchContainer">
         <div id="search">
           <form id="searchform" name="searchform" ng-submit="artistList.addArtist()">
-            <input type="text" name="s" placeholder="Enter your favorite band name" autocomplete="off" autofocus required aria-required="true" ng-model="artistList.artistText">
+            <label for="artistsearch">Type an artist that is inspiring you today</label>
+            <input type="text" name="artistsearch" id="artistsearch" placeholder="Type an artist" autocomplete="off" autofocus required ng-model="artistList.artistText">
             <button type="submit">Search</button>
           </form>
         </div>
+      </div>
+      <div data-module="artist-search-results">
+        <ul class="nolist">
+          <li ng-repeat="artist in artistList.artists | reverse" class="tag">{{artist.text}}</li>
+        </ul>
       </div>
     </header>
     <section data-role="content">
@@ -35,11 +41,20 @@
         <div id="results">
           <div data-module="artist-bio">
             <ul class="nolist">
-              <li ng-repeat="artist in artistList.artists" class="cell"><span>{{artist.text}}</span>
-                <div class="artistbio">
-                  <h2>{{artist.artistName}}</h2>
-                  <p ng-bind-html="artistBio"></p>
-                  <p>{{artist.tours}}</p><img src="{{artist.pic}}" alt="{{artist.name}}">
+              <li ng-repeat="artist in artistList.artists" class="cell">
+                <div class="artist-meta">
+                  <div class="artist-pic-container"> <img src="{{artist.pic}}" alt="{{artist.name}}"></div>
+                  <div class="artist-name">
+                    <h2>{{artist.name}}</h2><a ng-click="showDetails = ! showDetails" class="expand">Expand</a>
+                  </div>
+                  <div ng-class="{ 'hidden': ! showDetails }" class="more-info-container">
+                    <div class="more-info">
+                      <h3>About {{artist.name}}</h3>
+                      <p ng-bind-html="trustAsHtml(artist.bio)"></p>
+                      <h3>Upcoming Tours</h3>
+                      <p>{{artist.tours}}</p>
+                    </div>
+                  </div>
                 </div>
               </li>
             </ul>

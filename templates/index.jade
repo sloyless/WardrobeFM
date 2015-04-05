@@ -3,11 +3,15 @@ extends ./layout
 block page-meta
     title Home Page! - WardrobeFM
 
+block searchContainer
+    include modules/artist-search
+    include modules/artist-search-results
+
 block content
     section(id="resultscontainer")
         div(id="results")
             include modules/artist-bio
-            
+
             div(id="resultsRight")
                 div.artistbio
                     div(id="resultsheading")

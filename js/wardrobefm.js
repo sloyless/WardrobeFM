@@ -47,7 +47,7 @@ $(document).ready(function() {
 
 		results = true; // search has completed, don't animate the bar anymore
 
-    url = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' and artistName and '&autocorrect=1&api_key=a522b32b563f5f3789bd76e86dd69930&format=json';
+    url = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistName + '&autocorrect=1&api_key=a522b32b563f5f3789bd76e86dd69930&format=json';
 
     $.ajax({
 			url: url,

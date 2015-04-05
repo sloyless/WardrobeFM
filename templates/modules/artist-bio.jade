@@ -1,9 +1,15 @@
 div(data-module="artist-bio")
   ul.nolist
     li(ng-repeat="artist in artistList.artists" class="cell")
-      span {{artist.text}}
-      div.artistbio
-        h2 {{artist.artistName}}
-        p(ng-bind-html="artistBio")
-        p {{artist.tours}}
-        img(src="{{artist.pic}}" alt="{{artist.name}}")
+      div.artist-meta
+        div.artist-pic-container 
+          img(src="{{artist.pic}}" alt="{{artist.name}}")
+        div.artist-name
+          h2 {{artist.name}}
+          a.expand(ng-click="showDetails = ! showDetails") Expand
+        div.more-info-container(ng-class="{ 'hidden': ! showDetails }")
+          div.more-info
+            h3 About {{artist.name}}
+            p(ng-bind-html="trustAsHtml(artist.bio)")
+            h3 Upcoming Tours
+            p {{artist.tours}}

@@ -1,0 +1,29 @@
+#search
+  input[type="text"], button
+    +vendor_prefix(border-radius, 10px)
+    +vendor_prefix(box-shadow, 0 0 10px)
+    +inline-block
+    border: 0
+
+  input[type="text"]
+    +rem(font-size, $font-size-h2)
+    +rem(padding, 7px 9px)
+    color: #7b8386
+    width: 88%
+    height: 42px
+    outline: none
+    opacity: 0.9
+
+  button
+    +rem(font-size, 14px)
+    width: 7%
+    margin-left: 3%
+    height: 40px
+    background-color: $pink
+    color: white
+    font-weight: bold
+    text-transform: uppercase
+
+    &:hover,
+    &:focus
+      cursor: pointer
