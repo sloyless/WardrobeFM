@@ -25,7 +25,7 @@
         cache: true,
         async: false,
         success: function(data) {
-          return data;
+          return console.log(data);
         },
         error: function(data) {
           return console.log('Last.FM API Error: ', data);
@@ -35,7 +35,7 @@
         id: artistList.artists.length + 1,
         text: artistText,
         name: lastFMjson.artist.name,
-        pic: lastFMjson.artist.image[4]['#text'],
+        pic: lastFMjson.artist.image[2]['#text'],
         bio: lastFMjson.artist.bio.summary
       });
       return artistList.artistText = '';

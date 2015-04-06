@@ -4,15 +4,18 @@
     display: block
 
     ul
+        display: flex
+        justify-content: flex-end
+        flex-flow: wrap-reverse row-reverse
+        align-content: flex-start
+
+
         li
-            +inline-block
             width: 23%
+            height: 100%
             margin: 1%
-            border: 2px solid $border-color
-            box-shadow: 0 0 10px rgba(0,0,0,0.5)
-            background-color: white
-            border-radius: 10px
-            overflow: hidden
+            align-self: flex-end
+            position: relative
     
     .search-term
         +rem(padding, 5px 15px)
@@ -23,10 +26,12 @@
 
     .artist-pic-container
         +inline-block
-        width: 37%
-        height: 80px
+        +rem(width, 78px)
+        +rem(height, 80px)
         font-size: 0
         overflow: hidden
+        border: 3px solid $border-color
+        +rem(border-radius, 40px)
 
         img
             width: auto
@@ -34,22 +39,28 @@
             position: relative
             left: 49%
             +vendor-prefix(transform, translateX(-50%))
+            -webkit-backface-visibility: hidden
     
     .artist-meta
-        position: relative
+        position: absolute
+        top: 0
+        left: 40px
+        border: 2px solid $border-color
+        box-shadow: 0 0 10px rgba(0,0,0,0.5)
+        background-color: white
+        border-radius: 10px
 
     .artist-name
         +inline-block
-        margin-left: 3%
         margin-top: 3%
-        +rem(padding-right, 10px)
-        width: 58%
+        +rem(margin-left, 40px)
+        +rem(margin-bottom, 30px)
 
     a.expand
         position: absolute
-        +rem(top, 60px)
+        +rem(top, 40px)
         +rem(right, 7px)
-        +rem(font-size, 12px)
+        +rem(font-size, 10px)
         text-transform: uppercase
         cursor: pointer
 
@@ -61,12 +72,14 @@
             .more-info
                 height: 0
                 opacity: 0
+                visibility: hidden
 
     .more-info
-        +rem(font-size, 14px)
+        +rem(font-size, 12px)
         transition: all 0.2s ease-in-out
         height: 400px
         opacity: 1
+        visibility: visible
         
         > *
             +rem(margin, 0 15px)

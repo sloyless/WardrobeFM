@@ -2,8 +2,6 @@ div(data-module="artist-bio")
   ul.nolist
     li(ng-repeat="artist in artistList.artists" class="cell")
       div.artist-meta
-        div.artist-pic-container 
-          img(src="{{artist.pic}}" alt="{{artist.name}}")
         div.artist-name
           h2 {{artist.name}}
           a.expand(ng-click="showDetails = ! showDetails") Expand
@@ -13,3 +11,5 @@ div(data-module="artist-bio")
             p(ng-bind-html="trustAsHtml(artist.bio)")
             h3 Upcoming Tours
             p {{artist.tours}}
+      div.artist-pic-container 
+        img(src="{{artist.pic}}" alt="{{artist.name}}")

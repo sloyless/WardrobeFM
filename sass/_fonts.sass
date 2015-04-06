@@ -1,17 +1,18 @@
 body
-  +rem(font-size, $font-size-base)
-  font-family: $font-family-sans-serif
-  font-weight: $body-font-weight
+    +rem(font-size, $font-size-base)
+    font-family: $font-family-sans-serif
+    font-weight: $body-font-weight
 
 h1, h2
-  font-weight: $body-font-weight
+    font-family: $heading-font
+    font-weight: $body-font-weight
 
 h1
-  +rem(font-size, $font-size-h1)
-  +rem(margin, 0 0 15px)
-  +vendor_prefix(text-shadow, 0px 0px 10px $shadow)
-  color: $pink
+    +rem(font-size, $font-size-h1)
+    +rem(margin, 0 0 15px)
+    +vendor_prefix(text-shadow, 0px 0px 10px $shadow)
+    color: $pink
 
 h2
-  margin: 0
-  +rem(font-size, $font-size-h2)
+    margin: 0
+    +rem(font-size, $font-size-h2)

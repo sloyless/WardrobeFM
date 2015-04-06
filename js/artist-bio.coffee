@@ -20,7 +20,7 @@ app.controller 'artistListController', ($scope, $sce) ->
       cache: true,
       async: false,
       success: (data) ->
-        data
+        console.log(data)
       ,
       error: (data) ->
         console.log('Last.FM API Error: ', data)
@@ -30,7 +30,7 @@ app.controller 'artistListController', ($scope, $sce) ->
       id: artistList.artists.length + 1
       text: artistText,
       name: lastFMjson.artist.name,
-      pic: lastFMjson.artist.image[4]['#text'],
+      pic: lastFMjson.artist.image[2]['#text'],
       bio: lastFMjson.artist.bio.summary
     )
     artistList.artistText = ''
