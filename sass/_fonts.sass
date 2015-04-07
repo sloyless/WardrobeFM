@@ -1,10 +1,15 @@
-body
-    +rem(font-size, $font-size-base)
+.serif
     font-family: $font-family-sans-serif
+.sans
+    font-family: $font-family-serif
+
+body
+    @extend .serif
+    +rem(font-size, $font-size-base)
     font-weight: $body-font-weight
 
 h1, h2
-    font-family: $heading-font
+    @extend .sans
     font-weight: $body-font-weight
 
 h1

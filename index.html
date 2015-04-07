@@ -1,82 +1,49 @@
 <!DOCTYPE html>
 <html ng-app="artistBio" lang="en" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
-  <head>
-    <head profile="http://gmpg.org/xfn/11">
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Home Page! - WardrobeFM</title>
-      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600|Open+Sans+Condensed:300,700|Yanone+Kaffeesatz" type="text/css">
-      <link rel="stylesheet" href="css/normalize.css">
-      <link rel="stylesheet" href="css/style.css">
-      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-    </head>
+  <head profile="http://gmpg.org/xfn/11">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome! :: WardrobeFM - Your Style, your music.</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic|Oswald:400,300">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
   </head>
-  <body ng-controller="artistListController as artistList">
+  <body>
     <header id="header">
-      <nav id="menu">
-        <ul>
-          <li><a href="#" title="About Wardrobe.FM">About</a></li>
-          <li class="last"><a href="#" title="Get help">Help</a></li>
-        </ul>
-      </nav>
-      <h1>Wardrobe.FM</h1>
-      <div data-module="artist-search" id="searchContainer">
-        <div id="search">
-          <form id="searchform" name="searchform" ng-submit="artistList.addArtist()">
-            <label for="artistsearch">Type an artist that is inspiring you today</label>
-            <input type="text" name="artistsearch" id="artistsearch" placeholder="Type an artist" autocomplete="off" autofocus required ng-model="artistList.artistText">
-            <button type="submit">Search</button>
-          </form>
-        </div>
-      </div>
-      <div data-module="artist-search-results">
-        <ul class="nolist">
-          <li ng-repeat="artist in artistList.artists | reverse" class="tag">{{artist.text}}</li>
-        </ul>
+      <div class="wrapper">
+        <div id="logo"><a href="#"><img src="../images/logo.png" alt="WardrobeFM Logo"></a></div>
+        <div id="nav-left"></div>
       </div>
     </header>
-    <section data-role="content">
-      <section id="resultscontainer">
-        <div id="results">
-          <div data-module="artist-bio">
-            <ul class="nolist">
-              <li ng-repeat="artist in artistList.artists" class="cell">
-                <div class="artist-meta">
-                  <div class="artist-name">
-                    <h2>{{artist.name}}</h2><a ng-click="showDetails = ! showDetails" class="expand">Expand</a>
-                  </div>
-                  <div ng-class="{ 'hidden': ! showDetails }" class="more-info-container">
-                    <div class="more-info">
-                      <h3>About {{artist.name}}</h3>
-                      <p ng-bind-html="trustAsHtml(artist.bio)"></p>
-                      <h3>Upcoming Tours</h3>
-                      <p>{{artist.tours}}</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="artist-pic-container"> <img src="{{artist.pic}}" alt="{{artist.name}}"></div>
-              </li>
-            </ul>
-          </div>
-          <div id="resultsRight">
-            <div class="artistbio">
-              <div id="resultsheading">
-                <h2> </h2>
-              </div>
-              <div id="resultsbio">
-                <p> </p>
-              </div>
-              <div id="resultstours">
-                <p> </p>
-              </div>
+    <main role="main" ng-controller="artistListController as artistList">
+      <section id="post-box">
+        <div data-module="post-artist-search">
+          <form id="searchform" name="searchform" ng-submit="artistList.addArtist()">
+            <div id="post-artist-search">
+              <label for="artistsearch" class="visuallyhidden">Who is inspiring you today?</label>
+              <input type="text" name="artistsearch" id="artistsearch" placeholder="Who is inspiring you today?" autocomplete="off" autofocus required ng-model="artistList.artistText">
             </div>
-          </div>
+            <div data-module="post-artist-tags">
+              <ul class="nolist">
+                <li ng-repeat="artist in artistList.artists" class="tag">{{artist.text}}</li>
+              </ul>
+            </div>
+            <div id="post-artist-meta">
+              <button type="submit">Submit</button>
+              <ul class="post-types nolist">
+                <li><a class="post-photo"></a></li>
+                <li><a class="post-video"></a></li>
+                <li><a class="post-text-post"></a></li>
+                <li><a class="post-tag-friend"></a></li>
+              </ul>
+            </div>
+          </form>
         </div>
       </section>
-      <div class="modal"></div> 
-      </section>
-    </section>
+    </main>
+    <footer></footer>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="/js/vendor/modernizr-2.8.3.js"></script>

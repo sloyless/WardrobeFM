@@ -1,22 +1,10 @@
 extends ./layout
 
 block page-meta
-    title Home Page! - WardrobeFM
-
-block searchContainer
-    include modules/artist-search
-    include modules/artist-search-results
+    title Welcome! :: WardrobeFM - Your Style, your music.
 
 block content
-    section(id="resultscontainer")
-        div(id="results")
-            include modules/artist-bio
+    section(id="post-box")
+        include modules/post-artist-search
 
-            div(id="resultsRight")
-                div.artistbio
-                    div(id="resultsheading")
-                        h2 
-                    div(id="resultsbio")
-                        p 
-                    div(id="resultstours")
-                        p 
+

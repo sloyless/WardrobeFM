@@ -2,23 +2,23 @@
 // Mixins
 // --------------------------------------------------
 
-@mixin vendor-prefix($name, $argument)
+=vendor-prefix($name, $argument)
   -webkit-#{$name}: $argument
   -ms-#{$name}: $argument
   -moz-#{$name}: $argument
   -o-#{$name}: $argument
   #{$name}: $argument
 
-@mixin inline-block ($align: top)
+=inline-block ($align: top)
   display: inline-block
   vertical-align: $align
 
-@mixin centerVert ($position: relative)
+=centerVert ($position: relative)
   position: $position
   top: 50%
   +vendor-prefix(transform, translateY(-50%))
 
-@mixin imageUrl($fileName, $horizontal: center, $vertical: center)
+=imageUrl($fileName, $horizontal: center, $vertical: center)
   background: transparent url('#{$imageUrl}/#{$fileName}') no-repeat $vertical $horizontal
 
 @mixin cssAnimate ($property: all)

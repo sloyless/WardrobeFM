@@ -5,19 +5,16 @@ html(
   xmlns:og="http://ogp.me/ns#" 
   xmlns:fb="http://www.facebook.com/2008/fbml"
 )
-  head
-    include common/document_head
+  include common/document_head
 
-  block body
-    body(ng-controller="artistListController as artistList")
-      block header
-        include common/header
+  body
+    header(id="header")
+      include common/header
+      
+    main(role="main" ng-controller="artistListController as artistList")
+      block content
 
-      section(data-role="content")
-        block content
+    footer
+      include common/footer
 
-        block footer
-          include common/document_footer
-
-      block scripts
-        include common/script_inclusions
+    include common/script_inclusions

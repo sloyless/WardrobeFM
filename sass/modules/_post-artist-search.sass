@@ -1,0 +1,44 @@
+[data-module="post-artist-search"]
+    background-color: white
+    
+    #post-artist-meta
+        border-top: 2px solid $border-color
+
+    input[type="text"]
+        +rem(font-size, $font-size-h2)
+        +rem(padding, 7px 9px)
+        color: #7b8386
+        width: 88%
+        height: 42px
+        outline: none
+        opacity: 0.9
+        background-color: transparent
+        border: 0
+    
+    button
+        +inline-block
+
+    .post-types
+        +inline-block
+        +rem(margin-left, 10px)
+        li
+            +inline-block
+
+            a
+                display: block
+                cursor: pointer
+                +rem(width, 36px)
+                +rem(height, 30px)
+    
+    .post-photo
+        @extend %icon-photo
+
+    .post-video
+        @extend %icon-video
+
+    .post-text-post
+        @extend %icon-text
+
+    .post-tag-friend
+        @extend %icon-friend
+

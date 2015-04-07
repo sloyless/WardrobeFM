@@ -1,0 +1,32 @@
+div(data-module="post-artist-search")
+    form(
+        id="searchform" 
+        name="searchform" 
+        ng-submit="artistList.addArtist()"
+    )
+        div(id="post-artist-search")
+            label.visuallyhidden(for="artistsearch") Who is inspiring you today?
+            input(
+                type="text" 
+                name="artistsearch"
+                id="artistsearch"
+                placeholder="Who is inspiring you today?" 
+                autocomplete="off" 
+                autofocus 
+                required
+                ng-model="artistList.artistText"
+            )
+        
+        include post-artist-tags
+
+        div(id="post-artist-meta")
+            button(type="submit") Submit
+            ul(class="post-types nolist")
+                li
+                    a.post-photo
+                li
+                    a.post-video
+                li
+                    a.post-text-post
+                li
+                    a.post-tag-friend
