@@ -4,9 +4,8 @@ html
 body
   +vendor_prefix(background-size, cover)
   color: $text-color
-  background: $body-color url('../images/bg01.jpg') center center fixed no-repeat
+  background: $body-color url('../images/bg01.jpg') center -10px fixed no-repeat
   position: relative
-  height: 100vh
 
 /* Animation */
 input[type="submit"],
@@ -38,6 +37,7 @@ input[type="password"]
   text-rendering: optimizelegibility
 
 button
+  @extend .sans
   +rem(font-size, 14px)
   background-color: $pink
   color: white
@@ -80,6 +80,7 @@ ul.nolist
 
 .wrapper
   +rem(width, $siteWidth)
+  +rem(padding, 0 $sitePadding)
   margin-left: auto
   margin-right: auto
 

@@ -1,8 +1,9 @@
 .serif, body {
-  font-family: "Oswald", Helvetica, Arial, sans-serif; }
-
-.sans, h1, h2 {
   font-family: "Playfair Display", Times, serif; }
+
+.sans, h1, h2, button, [data-module="post-artist-tags"] .tag {
+  font-family: "Oswald", Helvetica, Arial, sans-serif;
+  letter-spacing: 1px; }
 
 body {
   font-size: 16px ;
@@ -29,9 +30,12 @@ h2 {
   font-size: 18px ;
   font-size: 1.8rem ; }
 
-[data-module="post-artist-search"] .post-photo, [data-module="post-artist-search"] .post-video, [data-module="post-artist-search"] .post-text-post, [data-module="post-artist-search"] .post-tag-friend {
-  width: 1em;
-  height: 1em;
+[data-module="post-artist-search"] .post-photo, [data-module="post-artist-search"] .post-video, [data-module="post-artist-search"] .post-text-post, [data-module="post-artist-search"] .post-tag-friend, [data-module="post-artist-tags"] .tag a::after {
+  content: "";
+  width: 16px ;
+  width: 1.6rem ;
+  height: 16px ;
+  height: 1.6rem ;
   display: inline-block; }
 
 [data-module="post-artist-search"] .post-photo {
@@ -46,6 +50,9 @@ h2 {
 [data-module="post-artist-search"] .post-tag-friend {
   background: url("../images/icons/icon-add-person.svg") no-repeat center center; }
 
+[data-module="post-artist-tags"] .tag a::after {
+  background: url("../images/icons/icon-clear-tag.svg") no-repeat center center; }
+
 html {
   font-size: 62.5%; }
 
@@ -56,9 +63,8 @@ body {
   -o-background-size: cover;
   background-size: cover;
   color: #252525;
-  background: black url("../images/bg01.jpg") center center fixed no-repeat;
-  position: relative;
-  height: 100vh; }
+  background: black url("../images/bg01.jpg") center -10px fixed no-repeat;
+  position: relative; }
 
 /* Animation */
 input[type="submit"],
@@ -128,6 +134,8 @@ ul.nolist {
 .wrapper, main {
   width: 960px ;
   width: 96rem ;
+  padding: 0 15px ;
+  padding: 0 1.5rem ;
   margin-left: auto;
   margin-right: auto; }
 
@@ -195,109 +203,35 @@ header#header {
   [data-module="post-artist-tags"] .tag {
     display: inline-block;
     vertical-align: top;
-    padding: 2px 10px 2px 4px ;
-    padding: 0.2rem 1rem 0.2rem 0.4rem ;
+    padding: 0 8px ;
+    padding: 0 0.8rem ;
     background-color: #8f043a;
     font-size: 10px ;
     font-size: 1rem ;
     margin: 0 5px ;
     margin: 0 0.5rem ;
-    text-transform: uppercase; }
+    text-transform: lowercase;
+    color: white;
+    line-height: 23px ;
+    line-height: 2.3rem ;
+    border-radius: 5px ;
+    border-radius: 0.5rem ; }
+    [data-module="post-artist-tags"] .tag a {
+      position: relative; }
+      [data-module="post-artist-tags"] .tag a::after {
+        margin-left: 5px ;
+        margin-left: 0.5rem ;
+        margin-top: 3px ;
+        margin-top: 0.3rem ;
+        display: inline-block;
+        vertical-align: top; }
 
 [data-module="post-artist-search"] [data-module="post-artist-tags"] {
   position: absolute;
-  right: 0; }
+  right: 0;
+  top: 0; }
 
-[data-module="artist-bio"] {
+[data-module="wfm-post"] {
   width: 100%;
   height: 100%;
   display: block; }
-  [data-module="artist-bio"] ul {
-    display: flex;
-    justify-content: flex-end;
-    flex-flow: wrap-reverse row-reverse;
-    align-content: flex-start; }
-    [data-module="artist-bio"] ul li {
-      width: 23%;
-      height: 100%;
-      margin: 1%;
-      align-self: flex-end;
-      position: relative; }
-  [data-module="artist-bio"] .search-term {
-    padding: 5px 15px ;
-    padding: 0.5rem 1.5rem ;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 14px ;
-    font-size: 1.4rem ;
-    font-weight: bold; }
-  [data-module="artist-bio"] .artist-pic-container {
-    display: inline-block;
-    vertical-align: top;
-    width: 78px ;
-    width: 7.8rem ;
-    height: 80px ;
-    height: 8rem ;
-    font-size: 0;
-    overflow: hidden;
-    border: 3px solid #8f043a;
-    border-radius: 40px ;
-    border-radius: 4rem ; }
-    [data-module="artist-bio"] .artist-pic-container img {
-      width: auto;
-      height: 100%;
-      position: relative;
-      left: 49%;
-      -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-      -moz-transform: translateX(-50%);
-      -o-transform: translateX(-50%);
-      transform: translateX(-50%);
-      -webkit-backface-visibility: hidden; }
-  [data-module="artist-bio"] .artist-meta {
-    position: absolute;
-    top: 0;
-    left: 40px;
-    border: 2px solid #8f043a;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    background-color: white;
-    border-radius: 10px; }
-  [data-module="artist-bio"] .artist-name {
-    display: inline-block;
-    vertical-align: top;
-    margin-top: 3%;
-    margin-left: 40px ;
-    margin-left: 4rem ;
-    margin-bottom: 30px ;
-    margin-bottom: 3rem ; }
-  [data-module="artist-bio"] a.expand {
-    position: absolute;
-    top: 40px ;
-    top: 4rem ;
-    right: 7px ;
-    right: 0.7rem ;
-    font-size: 10px ;
-    font-size: 1rem ;
-    text-transform: uppercase;
-    cursor: pointer; }
-    [data-module="artist-bio"] a.expand:hover, [data-module="artist-bio"] a.expand:focus {
-      text-decoration: none; }
-  [data-module="artist-bio"] .more-info-container.hidden .more-info {
-    height: 0;
-    opacity: 0;
-    visibility: hidden; }
-  [data-module="artist-bio"] .more-info {
-    font-size: 12px ;
-    font-size: 1.2rem ;
-    transition: all 0.2s ease-in-out;
-    height: 400px;
-    opacity: 1;
-    visibility: visible; }
-    [data-module="artist-bio"] .more-info > * {
-      margin: 0 15px ;
-      margin: 0 1.5rem ; }
-    [data-module="artist-bio"] .more-info h3 {
-      margin: 0 15px ;
-      margin: 0 1.5rem ;
-      padding-top: 15px ;
-      padding-top: 1.5rem ; }
