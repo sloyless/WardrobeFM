@@ -149,6 +149,10 @@ main {
   margin: 1rem 0 ;
   position: relative; }
 
+.hidden {
+  visibility: hidden;
+  height: 0; }
+
 header#header {
   background-color: #8f043a;
   width: 100%;
@@ -196,6 +200,13 @@ header#header {
         width: 3.6rem ;
         height: 30px ;
         height: 3rem ; }
+  [data-module="post-artist-search"] #post-text-container {
+    display: block;
+    transition: height 0.2s ease-out;
+    -webkit-backface-visibility: hidden;
+    height: 100%; }
+    [data-module="post-artist-search"] #post-text-container.hidden {
+      height: 0; }
 
 [data-module="post-artist-tags"] {
   margin: 10px 0 ;

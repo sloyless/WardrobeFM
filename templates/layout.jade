@@ -7,7 +7,7 @@ html(
 )
   include common/document_head
 
-  body
+  body(ng-cloak)
     header(id="header")
       include common/header
       
@@ -16,5 +16,3 @@ html(
 
     footer
       include common/footer
-
-    include common/script_inclusions

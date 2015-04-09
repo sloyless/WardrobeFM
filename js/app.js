@@ -20,7 +20,7 @@
         'src': '/images/demo/postimage.jpg'
       },
       'postCaption': {
-        'text': 'Title of photo'
+        'text': ''
       },
       'postArtists': {
         'artists': []

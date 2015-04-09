@@ -43,3 +43,10 @@
     .post-tag-friend
         @extend %icon-friend
 
+    #post-text-container
+        display: block
+        +cssAnimate(height)
+        height: 100%
+
+        &.hidden
+            height: 0
