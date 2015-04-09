@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic|Oswald:400,300">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="/js/vendor/angular.min.js"></script>
+    <!--script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js")-->
   </head>
   <body>
     <header id="header">
@@ -17,17 +18,17 @@
         <div id="nav-left"></div>
       </div>
     </header>
-    <main role="main" ng-controller="artistListController as artistList">
+    <main role="main">
       <section id="post-box">
-        <div data-module="post-artist-search">
-          <form id="searchform" name="searchform" ng-submit="artistList.addArtist()">
+        <div data-module="post-artist-search" ng-controller="createPost as postArtists">
+          <form id="searchform" name="searchform" ng-submit="postContent.addArtist()">
             <div id="post-artist-search">
               <label for="artistsearch" class="visuallyhidden">Who is inspiring you today?</label>
-              <input type="text" name="artistsearch" id="artistsearch" placeholder="Who is inspiring you today?" autocomplete="off" autofocus required ng-model="artistList.artistText">
+              <input type="text" name="artistsearch" id="artistsearch" placeholder="Who is inspiring you today?" autocomplete="off" autofocus required ng-model="postContent.postArtists.text">
             </div>
             <div data-module="post-artist-tags">
               <ul class="nolist">
-                <li ng-repeat="artist in artistList.artists" class="tag"><a href="#">{{artist.text}}</a></li>
+                <li ng-repeat="artist in postContent.postArtists.artists" class="tag"><a href="#">{{artist.text}}</a></li>
               </ul>
             </div>
             <div id="post-artist-meta">
@@ -44,19 +45,41 @@
       </section>
       <section id="post-list">
         <div data-module="wfm-post">
-          <article ng-repeat="artist in artistList.artists" class="cell">
-            <div class="artist-pic-container"> <img src="{{artist.pic}}" alt="{{artist.name}}"></div>
-            <div class="artist-meta">
-              <div class="artist-name">
-                <h2>{{artist.name}}</h2><a ng-click="showDetails = ! showDetails" class="expand">Expand</a>
-              </div>
-              <div ng-class="{ 'hidden': ! showDetails }" class="more-info-container">
-                <div class="more-info">
-                  <h3>About {{artist.name}}</h3>
-                  <p ng-bind-html="trustAsHtml(artist.bio)"></p>
-                  <h3>Upcoming Tours</h3>
-                  <p>{{artist.tours}}</p>
+          <article>
+            <div class="post-image"><img ng-src="{{postContent.postCaption.pic}}" alt=""></div>
+            <div class="post-artists">
+              <ul class="nolist">
+                <li ng-repeat="image in postContent.postImage.images" class="post-artist"><img ng-src="{{artist.pic}}" alt="{{artist.name}}">
+                  <div class="artist-meta"><span>{{artist.name}}</span><a ng-click="showDetails = ! showDetails" class="expand">Expand</a>
+                    <div ng-class="{ 'hidden': ! showDetails }" class="more-info-container">
+                      <div class="more-info">
+                        <h3>About {{artist.name}}</h3>
+                        <p ng-bind-html="trustAsHtml(artist.bio)"></p>
+                        <h3>Upcoming Tours</h3>
+                        <p>{{artist.tours}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="post-title">
+              <div class="user-avatar">
+                <div class="user-meta">
+                  <h3>{{postContent.user.name}}</h3><span>{{postContent.user.description}}</span><span>{{postContent.user.location}}</span>
                 </div>
+              </div>
+              <h2>{{postContent.post.title}}</h2>
+            </div>
+            <div class="post-meta">
+              <div class="post-date">{{postContent.post.datestamp}}</div>
+              <div class="share-bar">
+                <ul class="nolist">
+                  <li class="post-delete"> </li>
+                  <li class="post-comment"></li>
+                  <li class="post-fav"></li>
+                  <li class="post-share"></li>
+                </ul>
               </div>
             </div>
           </article>
@@ -64,7 +87,9 @@
       </section>
     </main>
     <footer></footer>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/js/vendor/jquery.min.js"></script>
+    <!--script(src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js")-->
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="/js/vendor/modernizr-2.8.3.js"></script>
     <script src="/js/app.js"></script>
   </body>

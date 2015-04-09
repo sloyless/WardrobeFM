@@ -1,14 +1,37 @@
 div(data-module="wfm-post")
-  article(ng-repeat="artist in artistList.artists" class="cell")
-    div.artist-pic-container 
-      img(src="{{artist.pic}}" alt="{{artist.name}}")
-    div.artist-meta
-      div.artist-name
-        h2 {{artist.name}}
-        a.expand(ng-click="showDetails = ! showDetails") Expand
-      div.more-info-container(ng-class="{ 'hidden': ! showDetails }")
-        div.more-info
-          h3 About {{artist.name}}
-          p(ng-bind-html="trustAsHtml(artist.bio)")
-          h3 Upcoming Tours
-          p {{artist.tours}}
+  article
+    div.post-image
+      img(ng-src="{{postContent.postCaption.pic}}" alt="")
+
+    div.post-artists
+      ul.nolist
+        li.post-artist(ng-repeat="image in postContent.postImage.images")
+          img(ng-src="{{artist.pic}}" alt="{{artist.name}}")
+          div.artist-meta
+            span {{artist.name}}
+            a.expand(ng-click="showDetails = ! showDetails") Expand
+
+            div.more-info-container(ng-class="{ 'hidden': ! showDetails }")
+              div.more-info
+                h3 About {{artist.name}}
+                p(ng-bind-html="trustAsHtml(artist.bio)")
+                h3 Upcoming Tours
+                p {{artist.tours}}
+
+    div.post-title
+      div.user-avatar
+        div.user-meta
+          h3 {{postContent.user.name}}
+          span {{postContent.user.description}}
+          span {{postContent.user.location}}
+      h2 {{postContent.post.title}}
+
+    div.post-meta
+      div.post-date
+        {{postContent.post.datestamp}}
+      div.share-bar
+        ul.nolist
+          li.post-delete 
+          li.post-comment
+          li.post-fav
+          li.post-share
