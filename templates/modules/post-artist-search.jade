@@ -2,7 +2,7 @@ div(data-module="post-artist-search" ng-controller="createPost as postArtists")
     form(
         id="searchform" 
         name="searchform" 
-        ng-submit="postContent.addArtist()"
+        ng-submit="postArtists.addArtist()"
     )
         div(id="post-artist-search")
             label.visuallyhidden(for="artistsearch") Who is inspiring you today?
@@ -14,7 +14,7 @@ div(data-module="post-artist-search" ng-controller="createPost as postArtists")
                 autocomplete="off" 
                 autofocus 
                 required
-                ng-model="postContent.postArtists.text"
+                ng-model="postArtists.text"
             )
         
         include post-artist-tags

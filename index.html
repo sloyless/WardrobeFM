@@ -21,14 +21,14 @@
     <main role="main">
       <section id="post-box">
         <div data-module="post-artist-search" ng-controller="createPost as postArtists">
-          <form id="searchform" name="searchform" ng-submit="postContent.addArtist()">
+          <form id="searchform" name="searchform" ng-submit="postArtists.addArtist()">
             <div id="post-artist-search">
               <label for="artistsearch" class="visuallyhidden">Who is inspiring you today?</label>
-              <input type="text" name="artistsearch" id="artistsearch" placeholder="Who is inspiring you today?" autocomplete="off" autofocus required ng-model="postContent.postArtists.text">
+              <input type="text" name="artistsearch" id="artistsearch" placeholder="Who is inspiring you today?" autocomplete="off" autofocus required ng-model="postArtists.text">
             </div>
             <div data-module="post-artist-tags">
               <ul class="nolist">
-                <li ng-repeat="artist in postContent.postArtists.artists" class="tag"><a href="#">{{artist.text}}</a></li>
+                <li ng-repeat="artist in createPost.postArtists.artists" class="tag"><a href="#">{{artist.name}}</a></li>
               </ul>
             </div>
             <div id="post-artist-meta">
@@ -44,19 +44,19 @@
         </div>
       </section>
       <section id="post-list">
-        <div data-module="wfm-post">
+        <div data-module="wfm-post" ng-repeat="content in createPost">
           <article>
-            <div class="post-image"><img ng-src="{{postContent.postCaption.pic}}" alt=""></div>
+            <div class="post-image"><img ng-src="{{postImage.src}}" alt=""></div>
             <div class="post-artists">
               <ul class="nolist">
-                <li ng-repeat="image in postContent.postImage.images" class="post-artist"><img ng-src="{{artist.pic}}" alt="{{artist.name}}">
+                <li ng-repeat="artist in content.postArtists.artists" class="post-artist"><img ng-src="{{artist.pic}}" alt="">
                   <div class="artist-meta"><span>{{artist.name}}</span><a ng-click="showDetails = ! showDetails" class="expand">Expand</a>
                     <div ng-class="{ 'hidden': ! showDetails }" class="more-info-container">
                       <div class="more-info">
                         <h3>About {{artist.name}}</h3>
                         <p ng-bind-html="trustAsHtml(artist.bio)"></p>
                         <h3>Upcoming Tours</h3>
-                        <p>{{artist.tours}}</p>
+                        <!--p {{artist.tours}}-->
                       </div>
                     </div>
                   </div>
@@ -66,13 +66,13 @@
             <div class="post-title">
               <div class="user-avatar">
                 <div class="user-meta">
-                  <h3>{{postContent.user.name}}</h3><span>{{postContent.user.description}}</span><span>{{postContent.user.location}}</span>
+                  <h3>{{user.name}}</h3><span>{{user.description}}</span><span>{{user.location}}</span>
                 </div>
               </div>
-              <h2>{{postContent.post.title}}</h2>
+              <h2>{{postCaption.text}}</h2>
             </div>
             <div class="post-meta">
-              <div class="post-date">{{postContent.post.datestamp}}</div>
+              <div class="post-date">{{datestamp}}</div>
               <div class="share-bar">
                 <ul class="nolist">
                   <li class="post-delete"> </li>

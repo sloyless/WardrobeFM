@@ -1,5 +1,5 @@
 div(data-module="post-artist-tags")
   ul.nolist
-    li(ng-repeat="artist in postContent.postArtists.artists" class="tag")
+    li(ng-repeat="artist in createPost.postArtists.artists" class="tag")
       a(href="#")
-        {{artist.text}}
+        {{artist.name}}

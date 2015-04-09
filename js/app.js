@@ -5,37 +5,34 @@
   angular.module('wardrobeFM', []);
 
   createPost = function($scope, $sce) {
-    var artistText, postContent;
+    var postArtists;
     $scope.trustAsHtml = $sce.trustAsHtml;
-    postContent = [
-      {
-        postId: 'post-0',
-        datestamp: '20150408',
-        user: {
-          id: 'user-1',
-          name: 'Sean Loyless',
-          description: 'Just this guy, you know?',
-          location: 'Austin, TX'
-        },
-        postImage: {
-          images: {
-            id: 'image-1',
-            src: '/images/'
-          }
-        },
-        postArtists: {
-          artists: ''
-        },
-        postCaption: {
-          text: 'Title of photo'
-        }
+    $scope.postContent = {
+      'postId': 'post-0',
+      'datestamp': '20150408',
+      'user': {
+        'id': 'user-1',
+        'name': 'Sean Loyless',
+        'description': 'Just this guy, you know?',
+        'location': 'Austin, TX'
+      },
+      'postImage': {
+        'src': '/images/demo/postimage.jpg'
+      },
+      'postCaption': {
+        'text': 'Title of photo'
+      },
+      'postArtists': {
+        'artists': []
       }
-    ];
-    artistText = postContent.postArtists.text;
-    postContent.addArtist = function() {
-      var lastFMjson, url;
+    };
+    postArtists = this;
+    postArtists.artists = [];
+    return postArtists.addArtist = function() {
+      var artistText, lastFMjson, url;
+      artistText = postArtists.text;
       url = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistText + '&autocorrect=1&api_key=a522b32b563f5f3789bd76e86dd69930&format=json';
-      return lastFMjson = $.ajax({
+      lastFMjson = $.ajax({
         url: url,
         datatype: 'jsonp',
         cache: true,
@@ -47,15 +44,16 @@
           return console.log('Last.FM API Error: ', data);
         }
       }).responseJSON;
+      $scope.postContent.postArtists.artists.push({
+        'id': $scope.postContent.postArtists.artists.length + 1,
+        'text': artistText,
+        'name': lastFMjson.artist.name,
+        'pic': lastFMjson.artist.image[2]['#text'],
+        'bio': lastFMjson.artist.bio.summary
+      });
+      postArtists.text = '';
+      return console.log($scope.postContent);
     };
-    postContent.artistList.artists.push({
-      id: postContent.postArtists.artists.length + 1,
-      text: artistText,
-      name: lastFMjson.artist.name,
-      pic: lastFMjson.artist.image[2]['#text'],
-      bio: lastFMjson.artist.bio.summary
-    });
-    return postContent.artistList.artistText = '';
   };
 
   angular.module('wardrobeFM').controller('createPost', createPost);

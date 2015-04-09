@@ -1,12 +1,12 @@
-div(data-module="wfm-post")
+div(data-module="wfm-post" ng-repeat="content in createPost")
   article
     div.post-image
-      img(ng-src="{{postContent.postCaption.pic}}" alt="")
+      img(ng-src="{{postImage.src}}" alt="")
 
     div.post-artists
       ul.nolist
-        li.post-artist(ng-repeat="image in postContent.postImage.images")
-          img(ng-src="{{artist.pic}}" alt="{{artist.name}}")
+        li.post-artist(ng-repeat="artist in content.postArtists.artists")
+          img(ng-src="{{artist.pic}}" alt="")
           div.artist-meta
             span {{artist.name}}
             a.expand(ng-click="showDetails = ! showDetails") Expand
@@ -16,19 +16,19 @@ div(data-module="wfm-post")
                 h3 About {{artist.name}}
                 p(ng-bind-html="trustAsHtml(artist.bio)")
                 h3 Upcoming Tours
-                p {{artist.tours}}
+                //p {{artist.tours}}
 
     div.post-title
       div.user-avatar
         div.user-meta
-          h3 {{postContent.user.name}}
-          span {{postContent.user.description}}
-          span {{postContent.user.location}}
-      h2 {{postContent.post.title}}
+          h3 {{user.name}}
+          span {{user.description}}
+          span {{user.location}}
+      h2 {{postCaption.text}}
 
     div.post-meta
       div.post-date
-        {{postContent.post.datestamp}}
+        {{datestamp}}
       div.share-bar
         ul.nolist
           li.post-delete 

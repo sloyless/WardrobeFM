@@ -15,12 +15,13 @@ Commas start artist search
       postImage
         id
         src
-      artistList
-        id
-        text
-        name
-        pic
-        bio
+      postArtists
+        artists
+          id
+          text
+          name
+          pic
+          bio
       postCaption
         text
 
