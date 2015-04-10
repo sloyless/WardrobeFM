@@ -42,12 +42,13 @@
 
   postContent = {
     'postId': 'post-0',
-    'datestamp': '20150408',
+    'datestamp': 'Friday, April 10, 2015 at 12:31 AM',
     'user': {
       'id': 'user-1',
       'name': 'Sean Loyless',
       'description': 'Just this guy, you know?',
-      'location': 'Austin, TX'
+      'location': 'Austin, TX',
+      'avatarSrc': '/images/demo/avatar.jpg'
     },
     'postImage': {
       'src': '/images/demo/postimage.jpg'

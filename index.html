@@ -56,26 +56,28 @@
           </form>
         </div>
         <div data-module="wfm-post-preview">
-          <article>
+          <article id="preview-{{ $index + 1 }}" class="post-box">
             <div class="post-image"><img ng-src="{{postContent.postImage.src}}" alt=""></div>
             <div class="post-artists">
               <ul class="nolist">
-                <li ng-repeat="artist in postContent.postArtists.artists" class="post-artist"><img ng-src="{{artist.pic}}" alt="">
-                  <div class="artist-meta"><span>{{artist.name}}</span><a ng-click="showDetails = ! showDetails" class="expand">Expand</a>
-                    <div ng-class="{ 'hidden': ! showDetails }" class="more-info-container">
-                      <div class="more-info">
-                        <h3>About {{artist.name}}</h3>
-                        <p ng-bind-html="trustAsHtml(artist.bio)"></p>
-                        <h3>Upcoming Tours</h3>
-                        <!--p {{artist.tours}}-->
-                      </div>
+                <li ng-repeat="artist in postContent.postArtists.artists" ng-mouseenter="hover = true" ng-mouseleave="hover = false" class="post-artist">
+                  <div ng-class="{show: hover}" class="post-show-details">
+                    <div class="post-artist-meta"><span>{{artist.name}}</span><a ng-click="showBio = ! showBio" class="expand"> <span class="visuallyhidden">Expand</span></a>
+                      <!--div.post-artist-bio(ng-class="{'hidden': ! showBio}")
+                      div.more-info
+                        h3 About {{artist.name}}
+                        p(ng-bind-html="trustAsHtml(artist.bio)")
+                        h3 Upcoming Tours
+                        //p {{artist.tours}}
+                      -->
                     </div>
                   </div>
+                  <div class="post-artist-image"><img ng-src="{{artist.pic}}" alt=""></div>
                 </li>
               </ul>
             </div>
             <div class="post-title">
-              <div class="user-avatar">
+              <div class="user-avatar"><img ng-src="{{postContent.user.avatarSrc}}" alt="">
                 <div class="user-meta">
                   <h3>{{postContent.user.name}}</h3><span>{{postContent.user.description}}</span><span>{{postContent.user.location}}</span>
                 </div>
@@ -83,13 +85,13 @@
               <h2 ng-model="postContent.postCaption.text">{{postContent.postCaption.text}}</h2>
             </div>
             <div class="post-meta">
-              <div class="post-date">{{postContent.datestamp}}</div>
+              <div class="post-date">Posted {{postContent.datestamp}}</div>
               <div class="share-bar">
                 <ul class="nolist">
-                  <li class="post-delete"> </li>
-                  <li class="post-comment"></li>
-                  <li class="post-fav"></li>
-                  <li class="post-share"></li>
+                  <li class="post-delete"><a ng-click="" title="Delete this post"><span class="visuallyhidden">Delete this post</span></a></li>
+                  <li class="post-comment"><a ng-click="" title="Comment on this post"><span class="visuallyhidden">Comment on this post</span></a></li>
+                  <li class="post-fav"><a ng-click="" title="Star this post"><span class="visuallyhidden">Star this post</span></a></li>
+                  <li class="post-share"><a ng-click="" title="Share this post"><span class="visuallyhidden">Share this post</span></a></li>
                 </ul>
               </div>
             </div>

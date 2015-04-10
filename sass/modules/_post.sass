@@ -1,4 +1,166 @@
-[data-module="wfm-post"]
+.post-box
+  +rem(margin-bottom, 30px)
+
+#post-text-container
+  input[type="text"]
     width: 100%
-    height: 100%
+
+.post-artist
+  position: relative
+  display: block
+  +rem(width, 80px)
+  +rem(height, 80px)
+  +rem(margin, 20px 0 20px auto)
+  cursor: pointer
+
+  &:first-child
+    margin-top: 0
+
+  &:last-child
+    margin-bottom: 0
+
+.post-image
+  img
+    width: 100%
+    height: auto
+
+.post-artists
+  position: absolute
+  +rem(top, 15px)
+  +rem(right, 10px)
+  overflow: hidden
+  +rem(width, 230px)
+
+  .post-show-details
+    visibility: hidden
+    +rem(width, 200px)
+    overflow: hidden
+    padding-right: 20px
+
+    //Hidden classes
+    &.show
+      visibility: visible
+
+      .post-artist-meta
+        +rem(right, 20px)
+
+.post-artist-meta
+  +transition(right 0.2s ease-out)
+  width: 0
+  +rem(min-width, 200px)
+  +rem(min-height, 42px)
+  position: absolute
+  top: 0
+  right: 0
+  +rem(padding, 7px 70px 7px 10px)
+  background: $pink
+  +rem(border-radius, 20px)
+  text-align: right
+  overflow: hidden
+  box-shadow: $box-shadow
+  opacity: 0.9
+
+  span
     display: block
+    @extend .sans
+    text-transform: uppercase
+    color: white
+    +rem(font-size, 12px)
+
+.post-artist-image
+  display: block
+  +rem(border-radius, 40px)
+  box-shadow: $box-shadow
+  +rem(width, 80px)
+  +rem(height, 80px)
+  overflow: hidden
+
+  img
+    width: auto
+    height: 100%
+    position: relative
+    left: 50%
+    +vendor-prefix(transform, translateX(-50%))
+
+.post-title
+  position: absolute
+  bottom: 30px
+  left: 0
+  width: 100%
+  background: white
+  opacity: 0.8
+  +rem(padding, 5px 40px 10px 100px)
+  +rem(min-height, 60px)
+
+  > h2
+    @extend .serif
+    letter-spacing: 0
+    font-weight: bold
+    margin: 0
+
+.post-meta
+  @extend .sans
+  position: absolute
+  bottom: 0
+  +rem(height, 30px)
+  background: $pink
+  width: 100%
+  +rem(padding, 6px 10px)
+  color: white
+  text-transform: uppercase
+  +rem(font-size, 11px)
+
+  > div
+    +inline-block
+    width: 49%
+
+.user-avatar
+  position: absolute
+  +rem(top, -25px)
+  +rem(left, 10px)
+  display: block
+  +rem(width, 80px)
+  +rem(height, 80px)
+  overflow: hidden
+  border-radius: 40px
+  border: 4px solid $pink
+  box-shadow: $box-shadow
+
+  img
+    width: 100%
+    height: auto
+  h3
+    margin-top: 0
+
+.share-bar
+  text-align: right
+
+  li
+    +inline-block
+    +rem(height, 20px)
+    +rem(margin, 0 10px)
+
+    a
+      display: block
+      +rem(height, 20px)
+
+    &.post-delete
+      a:after
+        @extend %icon-trash
+
+    &.post-comment
+      a:after
+        @extend %icon-comment
+
+    &.post-fav
+      a:after
+        @extend %icon-star-empty
+
+    &.post-share
+      a:after
+        @extend %icon-share
+
+[data-module="wfm-post-preview"]
+  width: 100%
+  height: 100%
+  display: block

@@ -1,25 +1,28 @@
 div(data-module="wfm-post-preview")
-  article
+  article.post-box(id="preview-{{ $index + 1 }}")
     div.post-image
       img(ng-src="{{postContent.postImage.src}}" alt="")
 
     div.post-artists
       ul.nolist
-        li.post-artist(ng-repeat="artist in postContent.postArtists.artists")
-          img(ng-src="{{artist.pic}}" alt="")
-          div.artist-meta
-            span {{artist.name}}
-            a.expand(ng-click="showDetails = ! showDetails") Expand
+        li.post-artist(ng-repeat="artist in postContent.postArtists.artists" ng-mouseenter="hover = true" ng-mouseleave="hover = false")
+          div.post-show-details(ng-class="{show: hover}")
+            div.post-artist-meta
+              span {{artist.name}}
+              a.expand(ng-click="showBio = ! showBio") 
+                span.visuallyhidden Expand
 
-            div.more-info-container(ng-class="{ 'hidden': ! showDetails }")
-              div.more-info
-                h3 About {{artist.name}}
-                p(ng-bind-html="trustAsHtml(artist.bio)")
-                h3 Upcoming Tours
-                //p {{artist.tours}}
-
+              //div.post-artist-bio(ng-class="{'hidden': ! showBio}")
+                div.more-info
+                  h3 About {{artist.name}}
+                  p(ng-bind-html="trustAsHtml(artist.bio)")
+                  h3 Upcoming Tours
+                  //p {{artist.tours}}
+          div.post-artist-image
+            img(ng-src="{{artist.pic}}" alt="")
     div.post-title
       div.user-avatar
+        img(ng-src="{{postContent.user.avatarSrc}}" alt="")
         div.user-meta
           h3 {{postContent.user.name}}
           span {{postContent.user.description}}
@@ -28,10 +31,18 @@ div(data-module="wfm-post-preview")
 
     div.post-meta
       div.post-date
-        {{postContent.datestamp}}
+        | Posted {{postContent.datestamp}}
       div.share-bar
         ul.nolist
-          li.post-delete 
+          li.post-delete
+            a(ng-click="" title="Delete this post")
+              span.visuallyhidden Delete this post
           li.post-comment
+            a(ng-click="" title="Comment on this post")
+              span.visuallyhidden Comment on this post
           li.post-fav
+            a(ng-click="" title="Star this post")
+              span.visuallyhidden Star this post
           li.post-share
+            a(ng-click="" title="Share this post")
+              span.visuallyhidden Share this post

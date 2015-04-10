@@ -24,3 +24,7 @@
 @mixin cssAnimate ($property: all)
   transition: $property 0.2s ease-out
   -webkit-backface-visibility: hidden // prevents chrome pixel jumping
+
+@mixin transition($value...) 
+  -webkit-transition: $value
+  transition: $value
