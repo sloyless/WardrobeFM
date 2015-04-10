@@ -1,11 +1,11 @@
-div(data-module="wfm-post" ng-repeat="content in createPost")
+div(data-module="wfm-post-preview")
   article
     div.post-image
-      img(ng-src="{{postImage.src}}" alt="")
+      img(ng-src="{{postContent.postImage.src}}" alt="")
 
     div.post-artists
       ul.nolist
-        li.post-artist(ng-repeat="artist in content.postArtists.artists")
+        li.post-artist(ng-repeat="artist in postContent.postArtists.artists")
           img(ng-src="{{artist.pic}}" alt="")
           div.artist-meta
             span {{artist.name}}
@@ -21,14 +21,14 @@ div(data-module="wfm-post" ng-repeat="content in createPost")
     div.post-title
       div.user-avatar
         div.user-meta
-          h3 {{user.name}}
-          span {{user.description}}
-          span {{user.location}}
-      h2 {{postCaption.text}}
+          h3 {{postContent.user.name}}
+          span {{postContent.user.description}}
+          span {{postContent.user.location}}
+      h2(ng-model="postContent.postCaption.text") {{postContent.postCaption.text}}
 
     div.post-meta
       div.post-date
-        {{datestamp}}
+        {{postContent.datestamp}}
       div.share-bar
         ul.nolist
           li.post-delete 

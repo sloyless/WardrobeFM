@@ -2,25 +2,7 @@ angular.module 'wardrobeFM', []
 
 createPost = ($scope, $sce) ->
   $scope.trustAsHtml = $sce.trustAsHtml
-  
-  $scope.postContent = {
-    'postId': 'post-0',
-    'datestamp': '20150408',
-    'user':
-      'id': 'user-1',
-      'name': 'Sean Loyless',
-      'description': 'Just this guy, you know?',
-      'location': 'Austin, TX'
-    ,
-    'postImage':
-      'src': '/images/demo/postimage.jpg'
-    ,
-    'postCaption':
-      'text': ''
-    ,
-    'postArtists':
-      'artists': []
-  }
+  $scope.postContent = postContent
   postArtists = @
   postArtists.artists = []
 
@@ -54,3 +36,22 @@ createPost = ($scope, $sce) ->
 angular
   .module 'wardrobeFM'
   .controller 'createPost', createPost
+
+postContent = {
+  'postId': 'post-0',
+  'datestamp': '20150408',
+  'user':
+    'id': 'user-1',
+    'name': 'Sean Loyless',
+    'description': 'Just this guy, you know?',
+    'location': 'Austin, TX'
+  ,
+  'postImage':
+    'src': '/images/demo/postimage.jpg'
+  ,
+  'postCaption':
+    'text': ''
+  ,
+  'postArtists':
+    'artists': []
+}

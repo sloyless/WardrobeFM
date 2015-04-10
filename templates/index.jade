@@ -1,11 +1,6 @@
 extends ./layout
 
-block page-meta
-    title Welcome! :: WardrobeFM - Your Style, your music.
-
 block content
-    section(id="post-box")
-        include modules/post-artist-search
-
-    section(id="post-list")
-        include modules/post
+  section(id="post-box" ng-controller="createPost as postArtists")
+    include modules/post-artist-search
+    include modules/post-preview
