@@ -1,22 +1,6 @@
-extends ./layout
-
-block page-meta
-    title Home Page! - WardrobeFM
-
-block searchContainer
-    include modules/artist-search
-    include modules/artist-search-results
+extends layout
 
 block content
-    section(id="resultscontainer")
-        div(id="results")
-            include modules/artist-bio
-
-            div(id="resultsRight")
-                div.artistbio
-                    div(id="resultsheading")
-                        h2 
-                    div(id="resultsbio")
-                        p 
-                    div(id="resultstours")
-                        p 
+  section(id="post-box" ng-controller="createPost as postArtists")
+    include modules/post-artist-search
+    include modules/post-preview

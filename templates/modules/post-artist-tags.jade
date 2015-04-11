@@ -1,0 +1,4 @@
+div(data-module="post-artist-tags" ng-repeat="post in postContent")
+  ul.nolist
+    li(ng-repeat="artist in postContent.postArtists.artists" class="tag")
+      a(href="#") {{artist.name}}

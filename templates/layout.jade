@@ -1,23 +1,18 @@
 doctype html
 html(
-  ng-app="artistBio"
+  ng-app="wardrobeFM"
   lang="en" 
   xmlns:og="http://ogp.me/ns#" 
   xmlns:fb="http://www.facebook.com/2008/fbml"
 )
-  head
-    include common/document_head
+  include common/document_head
 
-  block body
-    body(ng-controller="artistListController as artistList")
-      block header
-        include common/header
+  body(ng-cloak)
+    header(id="header")
+      include common/header
+      
+    main(role="main")
+      block content
 
-      section(data-role="content")
-        block content
-
-        block footer
-          include common/document_footer
-
-      block scripts
-        include common/script_inclusions
+    footer
+      include common/footer

@@ -1,0 +1,30 @@
+//
+// Mixins
+// --------------------------------------------------
+
+=vendor-prefix($name, $argument)
+  -webkit-#{$name}: $argument
+  -ms-#{$name}: $argument
+  -moz-#{$name}: $argument
+  -o-#{$name}: $argument
+  #{$name}: $argument
+
+=inline-block ($align: top)
+  display: inline-block
+  vertical-align: $align
+
+=centerVert ($position: relative)
+  position: $position
+  top: 50%
+  +vendor-prefix(transform, translateY(-50%))
+
+=imageUrl($fileName, $horizontal: center, $vertical: center)
+  background: transparent url('#{$imageUrl}/#{$fileName}') no-repeat $vertical $horizontal
+
+@mixin cssAnimate ($property: all)
+  transition: $property 0.2s ease-out
+  -webkit-backface-visibility: hidden // prevents chrome pixel jumping
+
+@mixin transition($value...) 
+  -webkit-transition: $value
+  transition: $value
