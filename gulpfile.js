@@ -2,19 +2,18 @@
 var gulp = require('gulp'),
     webserver = require('gulp-webserver'),
     del = require('del'),
-    sass = require('gulp-sass'),
+    sass = require('gulp-ruby-sass'),
     jade = require('gulp-jade'),
     coffee = require('gulp-coffee'),
-    //karma = require('gulp-karma'),
     jshint = require('gulp-jshint'),
     sourcemaps = require('gulp-sourcemaps'),
-    spritesmith = require('gulp.spritesmith'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
     uglify = require('gulp-uglify'),
     gutil = require('gulp-util'),
-    ngAnnotate = require('browserify-ngannotate');
+    ngAnnotate = require('browserify-ngannotate')
+    livereload = require('gulp-livereload');
 
 var CacheBuster = require('gulp-cachebust');
 var cachebust = new CacheBuster();
@@ -52,12 +51,16 @@ gulp.task('bower', function() {
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('build-css', ['clean'], function() {
-    return gulp.src('./sass/css*')
-        .pipe(sourcemaps.init())
-        .pipe(sass())
-        .pipe(cachebust.resources())
-        .pipe(sourcemaps.write('./maps'))
-        .pipe(gulp.dest('./css/'));
+    return sass('sass/', {sourcemap: true}) 
+    .on('error', function (err) {
+      console.error('Error!', err.message);
+   })
+    .pipe(sourcemaps.write('./', {
+        includeContent: false,
+        sourceRoot: '/css'
+    }))
+    .pipe(gulp.dest('./dist/css/'))
+    .pipe(livereload());
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -66,12 +69,48 @@ gulp.task('build-css', ['clean'], function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('templates', function() {
-  gulp.src('./templates/*.jade')
+gulp.task('jade', ['clean'], function() {
+  return gulp.src('./templates/*.jade')
     .pipe(jade({
-      client: true
+        pretty: true
     }))
-    .pipe(gulp.dest('./'))
+    .pipe(gulp.dest('./dist'))
+    .pipe(livereload());
+});
+
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// runs coffee
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('coffee', ['clean'], function() {
+  gulp.src('./js/**/*.coffee')
+    .pipe(sourcemaps.init())
+    .pipe(coffee({bare: true}).on('error', gutil.log))
+    .pipe(sourcemaps.write('./', {
+        includeContent: false,
+        sourceRoot: '/js'
+    }))
+    .pipe(gulp.dest('./dist/js'))
+});
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// Copy static assets
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('copy', ['clean'], function() {
+  gulp.src('./images/**')
+    .pipe(gulp.dest('./dist/images'));
+ 
+  gulp.src('./css/*.css')
+    .pipe(gulp.dest('./dist/css/vendor'));
+
+  gulp.src('./js/vendor/*.js')
+    .pipe(gulp.dest('./dist/js/vendor'));
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -107,52 +146,6 @@ gulp.task('jshint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-/////////////////////////////////////////////////////////////////////////////////////
-//
-// runs karma tests
-//
-/////////////////////////////////////////////////////////////////////////////////////
-
-// gulp.task('test', ['build-js'], function() {
-//     var testFiles = [
-//         './test/unit/*.js'
-//     ];
-
-//     return gulp.src(testFiles)
-//         .pipe(karma({
-//             configFile: 'karma.conf.js',
-//             action: 'run'
-//         }))
-//         .on('error', function(err) {
-//             console.log('karma tests failed: ' + err);
-//             throw err;
-//         });
-// });
-/////////////////////////////////////////////////////////////////////////////////////
-//
-// Build a minified Javascript bundle - the order of the js files is determined
-// by browserify
-//
-/////////////////////////////////////////////////////////////////////////////////////
-
-gulp.task('build-js', ['clean'], function() {
-    var b = browserify({
-        entries: './js/app.js',
-        debug: true,
-        paths: ['./js/controllers', './js/services', './js/directives'],
-        transform: [ngAnnotate]
-    });
-
-    return b.bundle()
-        .pipe(source('bundle.js'))
-        .pipe(buffer())
-        .pipe(cachebust.resources())
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify())
-        .on('error', gutil.log)
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./dist/js/'));
-});
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -160,7 +153,7 @@ gulp.task('build-js', ['clean'], function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build', [ 'clean', 'bower','build-css','build-template-cache', 'jshint', 'build-js'], function() {
+gulp.task('build', [ 'clean', 'bower', 'build-css', 'jade', 'coffee', 'build-template-cache', 'jshint', 'copy'], function() {
     return gulp.src('index.html')
         .pipe(cachebust.references())
         .pipe(gulp.dest('dist'));
@@ -172,8 +165,9 @@ gulp.task('build', [ 'clean', 'bower','build-css','build-template-cache', 'jshin
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
+// Watch
 gulp.task('watch', function() {
-    return gulp.watch(['./index.html','./partials/*.html', './styles/*.*css', './js/**/*.js'], ['build']);
+  return gulp.watch(['./sass/**/*.sass', './js/**/*.coffee', './jade/**/*.jade'], ['build']);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -185,7 +179,7 @@ gulp.task('watch', function() {
 gulp.task('webserver', ['watch','build'], function() {
     gulp.src('.')
         .pipe(webserver({
-            livereload: false,
+            livereload: true,
             directoryListing: true,
             open: "http://localhost:8000/dist/index.html"
         }));
@@ -199,26 +193,6 @@ gulp.task('webserver', ['watch','build'], function() {
 
 gulp.task('dev', ['watch', 'webserver']);
 
-/////////////////////////////////////////////////////////////////////////////////////
-//
-// generates a sprite png and the corresponding sass sprite map.
-// This is not included in the recurring development build and needs to be run separately
-//
-/////////////////////////////////////////////////////////////////////////////////////
-
-gulp.task('sprite', function () {
-
-    var spriteData = gulp.src('./images/*.png')
-        .pipe(spritesmith({
-            imgName: 'todo-sprite.png',
-            cssName: '_todo-sprite.scss',
-            algorithm: 'top-down',
-            padding: 5
-        }));
-
-    spriteData.css.pipe(gulp.dest('./dist'));
-    spriteData.img.pipe(gulp.dest('./dist'))
-});
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -226,4 +200,4 @@ gulp.task('sprite', function () {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('default', ['sprite','build', 'test']);
+gulp.task('default', ['build']);
