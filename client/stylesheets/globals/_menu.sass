@@ -1,5 +1,5 @@
 #menu 
-  .background-image(
+  +background-image(
     linear-gradient(top, rgba(85,134,223,.1), rgba(0,0,0,0) 100%),
     url('img/app/bg-menu-640x1136.jpg')
   )
@@ -20,19 +20,19 @@
       color: $color-empty
 
     .wrapper-menu-item 
-      .font-s2
-      .type-bold
-      .position(absolute, 50%, auto, auto, 50%)
-      .transform(translate3d(-50%, -50% ,0))
+      +font-s2
+      +type-bold
+      +position(absolute, 50%, auto, auto, 50%)
+      +transform(translate3d(-50%, -50% ,0))
       display: block
     
 
     [class^="icon-"],
     [class*=" icon-"] 
-      .font-m1
+      +font-m1
       display: block
       margin-bottom: 5%
     
     .title-menu 
-      .title-caps
+      +title-caps
       display: block

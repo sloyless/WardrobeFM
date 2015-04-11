@@ -1,6 +1,6 @@
 // Welcome message
 .wrapper-welcome 
-  .position(absolute, 1.25em, auto, auto, 0, 25%)
+  +position(absolute, 1.25em, auto, auto, 0, 25%)
   padding: 0 1.25rem
   z-index: -1
 
@@ -10,22 +10,22 @@
     display: block 
 
   .title-welcome 
-    @include .font-s3
-    @include .type-black
-    @include .title-caps
+    +font-s3
+    +type-black
+    +title-caps
     color: $color-primary
     margin-bottom: .5em
     text-indent: 0
 
   .description-welcome 
-    @include .font-s2
+    +font-s2
     color: $color-well
 
     & + .description-welcome  
       margin-top: .5rem 
 
     a 
-      @include .type-bold
+      +type-bold
       color: $color-medium-well
 
       &:hover  

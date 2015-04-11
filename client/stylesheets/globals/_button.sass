@@ -1,14 +1,14 @@
 [class^="btn-"],
 [class*=" btn-"] 
   // Sizing
-  .font-s2
+  +font-s2
   line-height: 22px !important //override line-height always so we can use em's to size.
   padding: 1.2em 1.25em .95em // 48px tall
 
   // Style
-  .type-black
-  .title-caps
-  .transition( all 200ms ease-in )
+  +type-black
+  +title-caps
+  +transition( all 200ms ease-in )
   color: $color-empty
   display: inline-block
   position: relative
@@ -79,10 +79,10 @@
     text-indent: 0 //reset
     width: 4rem
 
-    .icon-camera 
+    +icon-camera 
       $dimension-camera: 3.5rem
-      .position(absolute, 50%, 50%, auto, auto, $dimension-camera, $dimension-camera )
-      .transform(translate3d(50%, -50%,0))
+      +position(absolute, 50%, 50%, auto, auto, $dimension-camera, $dimension-camera )
+      +transform(translate3d(50%, -50%,0))
       background-color: $color-primary
       border-radius: 10em
       color: $color-empty
@@ -92,23 +92,23 @@
 
     &:hover 
       box-shadow: darken($color-primary, 3%) 0 0 0px 2px inset
-      .icon-camera
+      +icon-camera
         background-color: darken($color-primary, 3%) 
     
 
     &:active 
       box-shadow: darken($color-primary, 3%) 0 0 0px 2px inset
-      .icon-camera
+      +icon-camera
         background-color: darken($color-primary, 3%) 
 
   &[disabled]
     opacity: .5 
 
-.btns-group 
-  .display(flex)
-  .flex-wrap(wrap)
++btns-group 
+  +display(flex)
+  +flex-wrap(wrap)
   width: 100%
 
   [class*="btn-"] 
-    .ellipsized
-    .flex(1)
+    +ellipsized
+    +flex(1)

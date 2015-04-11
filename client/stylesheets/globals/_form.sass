@@ -1,15 +1,15 @@
 // standard text input
 input[type="text"],
 textarea 
-  .font-s3
-  .type-regular
+  +font-s3
+  +type-regular
 
   // Sizing
   padding: 1rem 1.25rem //total height ~48
   line-height: 1.5em !important
 
   // Style
-  .placeholder($color-medium)
+  +placeholder($color-medium)
   background: transparent
   border: none
   border-radius: 0
@@ -23,9 +23,9 @@ textarea
   &[disabled]  opacity: .5 
 
 // Custom checkbox
-.checkbox 
-  .font-s3
-  .type-bold
++checkbox 
+  +font-s3
+  +type-bold
   color: $color-medium
   clear: both
   display: block
@@ -40,7 +40,7 @@ textarea
     visibility: hidden
 
     & + span:before 
-      .position(relative, auto, auto, auto, -1em, .85em, .85em)
+      +position(relative, auto, auto, auto, -1em, .85em, .85em)
       content: ''
       box-shadow: $color-medium 0 0 0 1px inset
       display: inline-block
@@ -65,5 +65,3 @@ textarea
 
     	// Checkmark icon
       content: "\e609"
-    
-  

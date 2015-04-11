@@ -1,13 +1,12 @@
 #admin 
-  .position(absolute, 0, 0, 0, 0)
+  +position(absolute, 0, 0, 0, 0)
   background: $color-raw
 
   .back-desktop 
-    .font-s2
-    .title-caps
-    .type-black
-    .position(absolute, 1.5rem, auto, auto, 1.5rem)
-  
+    +font-s2
+    +title-caps
+    +type-black
+    +position(absolute, 1.5rem, auto, auto, 1.5rem)
 
   .wrapper-admin 
     text-align: center
@@ -16,22 +15,21 @@
       margin: 7rem 15% 
   
   .title-admin 
-    .font-m3
-    .title-caps
-    .type-black
+    +font-m3
+    +title-caps
+    +type-black
     margin-bottom: 2rem
   
 
   label 
-    .font-s3
-    .type-bold
+    +font-s3
+    +type-bold
     display: block
     margin-bottom: .75rem
     padding-left: 1.25rem
-  
 
   form 
-    .font-s3
+    +font-s3
     background: $color-empty
     padding: .75rem 0 0
     text-align: left

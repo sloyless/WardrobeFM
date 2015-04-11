@@ -6,7 +6,7 @@
     color: $color-primary !important 
 
   .image-recipe 
-    .transform(translate3d(0,0,0))//Gpu rendering
+    +transform(translate3d(0,0,0))//Gpu rendering
     background-position: center center
     background-repeat: no-repeat
     background-size: cover
@@ -16,15 +16,15 @@
     width: 100%
 
     &:before 
-      .position(absolute, 0,0,0,0)
+      +position(absolute, 0,0,0,0)
       background: rgba(0,0,0,.3)
       content: ''
       opacity: 0
       z-index: 2
 
   .attribution-recipe 
-    .position(absolute, auto, 0, 0, 0, auto, auto)
-    .transform(translate3d(0,0,0)) // Gpu rendering
+    +position(absolute, auto, 0, 0, 0, auto, auto)
+    +transform(translate3d(0,0,0)) // Gpu rendering
     box-shadow: rgba(0,0,0,.1) 0 2px 2px 0
     min-height: 9em
     overflow: hidden
@@ -34,9 +34,9 @@
     z-index: 1
 
     &:after 
-      .background-image(linear-gradient(top, rgba(255,255,255,.9), rgba(255,255,255,1) 20%, $color-empty 100%))
-      .position(absolute,0,0,5px,0)
-      .transform(translate3d(0,0,0))
+      +background-image(linear-gradient(top, rgba(255,255,255,.9), rgba(255,255,255,1) 20%, $color-empty 100%))
+      +position(absolute,0,0,5px,0)
+      +transform(translate3d(0,0,0))
       content: ''
       min-height: 12em
       opacity: 1
@@ -44,88 +44,81 @@
     
 
     .title-recipe 
-      .font-m2
-      .type-bold
-      .transform(translateY(0))
-      .backface-visibility(hidden)
+      +font-m2
+      +type-bold
+      +transform(translateY(0))
+      +backface-visibility(hidden)
       margin-bottom: .5rem
       padding: 0 1rem
       width: 100% // Needed for iOS animation
     
 
     .metadata-wrapper 
-      .transform(translate3d(0,0,0))
+      +transform(translate3d(0,0,0))
       max-height: 10em
       opacity: 1
       overflow: hidden
     
 
     .description-recipe 
-      .font-s3
+      +font-s3
       color: $color-well
       margin-bottom: .5rem
       padding: 0 1em
 
-      &:after  content: '\2026'  // Ellipsis
-      &:empty  display: none 
+      &:after  
+        content: '\2026'  // Ellipsis
+      &:empty  
+        display: none 
     
 
     .source,
     .time 
-      .font-s1
+      +font-s1
       color: $color-medium
       display: inline-block
       vertical-align: middle
     
 
     .source 
-      .type-secondary
-      .title-caps
+      +type-secondary
+      +title-caps
       padding-right: .25rem
-    
 
     .time 
-      .type-bold
+      +type-bold
       border-left: 1px solid $color-medium-rare
       padding-left: .5rem
-    
-  
 
   .btns-group 
-    .position(absolute, auto, 0, 0, 0, 100%, 3em)
+    +position(absolute, auto, 0, 0, 0, 100%, 3em)
     background: $color-medium-well
     z-index:1
   
-
   .btn-tertiary 
     display: block
 
     [class^="icon-"],
     [class*=" icon-"] 
-      .font-s3
+      +font-s3
       letter-spacing: 0
       line-height: 1
       vertical-align: text-top
-    
   
-
   .content-scrollable 
     top: 100%
     margin-top: -1px // Fixes flicker from animations behind content-scrollable
   
-
   .item-ingredient + .item-ingredient,
   .item-direction + .item-direction 
     border-top: 1px solid $color-raw-alt
   
-
   .item-ingredient,
   .item-direction 
-    .font-s3
+    +font-s3
     background: $color-empty
     padding: .75rem 1.25rem
   
-
   .list-directions 
     counter-reset: ol-counter
     list-style-type: none
@@ -145,12 +138,9 @@
       .text 
         display: block
         overflow: hidden
-      
-    
-  
 
   .list-directions + .btn-primary 
-    .force-wrap
+    +force-wrap
     white-space: normal
     width: 100%
   
@@ -164,9 +154,9 @@
     top: 30%
   
   .feed-scrollable  
-    .transform(translate3d(100%, 0, 0)) 
+    +transform(translate3d(100%, 0, 0)) 
   .make-scrollable  
-    .transform(translate3d(0,0,0)) 
+    +transform(translate3d(0,0,0)) 
 
   .image-recipe:before 
     opacity: 1
@@ -184,58 +174,58 @@
     
   
   .title-recipe 
-    .transform(translateY(-30%))
+    +transform(translateY(-30%))
     color: $color-empty
     margin-top: 50%
     width: 100%
   
 
   .metadata-wrapper 
-    .transform(translate3d(0,100%,0))
+    +transform(translate3d(0,100%,0))
     max-height: 0
     opacity: 0
   
 
 
 // Collapse animation-specific styles
-@transition-time: 700ms
-@easing: cubic-bezier(0.175, 0.885, 0.335, 1.05)
+$transition-time: 700ms
+$easing: cubic-bezier(0.175, 0.885, 0.335, 1.05)
 .page.recipe 
   .image-recipe:before  
-    .transition( all @transition-time + 100ms ease-out ) 
+    +transition( all $transition-time + 100ms ease-out ) 
 
   .content-scrollable 
-    .transform(translate3d(0,0,0))
-    .transition( all @transition-time @easing )
-    .backface-visibility(hidden)
+    +transform(translate3d(0,0,0))
+    +transition( all $transition-time $easing )
+    +backface-visibility(hidden)
 
 
     &.instant  
-      .transition( transform 0, top @transition-time @easing ) 
+      +transition( transform 0, top $transition-time $easing ) 
     &.delayed  
-      .transition( transform 0 linear @transition-time, top @transition-time @easing) 
+      +transition( transform 0 linear $transition-time, top $transition-time $easing) 
   
 
   .attribution-recipe 
-    .transform(translate3d(0,0,0))
-    .transition( all @transition-time @easing )
-    .backface-visibility(hidden)
+    +transform(translate3d(0,0,0))
+    +transition( all $transition-time $easing )
+    +backface-visibility(hidden)
 
     &:after  
-      .transition( all @transition-time * .95 @easing ) 
+      +transition( all $transition-time * .95 $easing ) 
   
 
   .title-recipe 
-    .transition( all @transition-time * .75 @easing )
+    +transition( all $transition-time * .75 $easing )
   
 
   .metadata-wrapper  
-    .transition( all @transition-time * .5 @easing) 
+    +transition( all $transition-time * .5 $easing) 
 
 
 // Move the feed over the top when we are on it
 .page.recipe.feed 
   .feed-scrollable  
-    .transform(translate3d(0,0,0)) 
+    +transform(translate3d(0,0,0)) 
   .make-scrollable  
-    .transform(translate3d(-100%,0,0)) 
+    +transform(translate3d(-100%,0,0)) 
