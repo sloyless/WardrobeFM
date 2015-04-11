@@ -1,0 +1,37 @@
+template(name="home")
+  div(class="page home")
+    +nav title='Wardrobe.FM' black=false
+
+    div.content-scrollable
+      div(class="bg-image home")
+        h1.title-home
+          img(src="img/app/logo.png" alt="Wardrobe.FM")
+        span.hours
+          | Your&nbsp;&nbsp; 
+          span.title-callout Music.
+          | Your&nbsp;&nbsp; 
+          span.title-callout Inspiration.
+        span.arrow
+
+      div.callout-news
+        span.title-callout News
+        | #{latestNews.text}
+
+      h2.list-title Recent Inspiration
+      div.list-subtitle See what everyone else is inspired by today.
+      div.list-activities
+        each activities
+          +activity
+        else
+          div.wrapper-message
+            div.title-message No one is cooking yet!
+            div.subtitle-message Share that you made a recipe and it will show up here.
+      a.btn-primary(href="#{pathFor 'feed'}") See other posts
+
+      h2.list-title Our Favorite Recipes
+      div.list-subtitle Hand-picked by neighborhood chefs
+      div.list-recipes
+        each featuredRecipes
+          +recipeItem recipe=this size='small'
+
+      a.btn-primary(href="#{pathFor 'recipes'}") Explore all our recipes
