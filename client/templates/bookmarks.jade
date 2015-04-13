@@ -1,0 +1,16 @@
+template(name="bookmarks")
+  div(class="page bookmarks")
+    +nav title='Your Bookmarks' subtext=recipeCount
+
+    div.content-scrollable
+      div.list-recipes
+        | #{#each this}
+        +recipeItem recipe=this size='large'
+        | #{else}
+        div.wrapper-message
+          div.title-message No bookmarks yet
+          div.subtitle-message Tap 
+            span.icon-bookmark-hollow
+            | to bookmark your favorite recipes. 
+            a(href="#{pathFor 'home'}") Return home
+        | #{/each}
