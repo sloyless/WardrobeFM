@@ -1,15 +1,14 @@
 template(name="activity")
-  a.item-activity(href="#{path}")
+  a.item-activity(href="{{path}}")
     span.attribution
       span.avatar
-        img.image-avatar(src="#{userAvatar}")
+        img.image-avatar(src="{{userAvatar}}")
       span.meta
         span.author #{firstName}
         | made 
         span.recipe #{recipeTitle}
         | : #{text}
-        | #{#if place}
-        span.location &mdash;#{place}
-        | #{/if}
+        if place
+          span.location &mdash;#{place}
 
-    div.bg-image(style="background-image: url('#{image}');")
+    div.bg-image(style="background-image: url('{{image}}');")

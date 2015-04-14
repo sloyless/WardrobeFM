@@ -14,45 +14,43 @@ template(name="appBody")
     div.description-welcome You can also run it in a simulator, or in a desktop browser as a convenience (what you're looking at right now).
 
     div.description-welcome This app includes a simple administrative backend that you can use to set welcome text on the app's home screen. Visit 
-    a(href="#{pathFor 'admin'}") /admin
-    | to log into the backend. The first authenticated user is allowed access.
+      a(href="{{pathFor 'admin'}}") /admin
+      | to log into the backend. The first authenticated user is allowed access.
 
-  div(id="container" class="#{menuOpen} #{overlayOpen}")
+  div(id="container" class="{{menuOpen}} {{overlayOpen}}")
     section.overthrow(id="menu")
-      a(href="#{pathFor 'home'}" class="#{activePage 'home'}")
+      a(href="{{pathFor 'home'}}" class="{{activePage 'home'}}")
         span.wrapper-menu-item
           span.icon-home
           span.title-menu Home
-      a(href="#{pathFor 'feed'}" class="#{activePage 'feed'}")
+      a(href="{{pathFor 'feed'}}" class="{{activePage 'feed'}}")
         span.wrapper-menu-item
           span.icon-rss
           span.title-menu What's 
             br
             | Cooking
-      a(href="#{pathFor 'recipes'}" class="#{activePage 'recipes' 'recipe'}")
+      a(href="{{pathFor 'recipes'}}" class="{{activePage 'recipes' 'recipe'}}")
         span.wrapper-menu-item
           span.icon-category
           span.title-menu Recipes
-      a(href="#{pathFor 'bookmarks'}" class="#{activePage 'bookmarks'}")
+      a(href="{{pathFor 'bookmarks'}}" class="{{activePage 'bookmarks'}}")
         span.wrapper-menu-item
           span.icon-bookmark-hollow
           span.title-menu Bookmarks
-      a(href="#{pathFor 'about'}" class="#{activePage 'about'}")
+      a(href="{{pathFor 'about'}}" class="{{activePage 'about'}}")
         span.wrapper-menu-item
           span.icon-question
           span.title-menu About
 
       div.notifications
-        | #{#unless connected}
-        div.notification
-          span.icon-sync
-          div.title-notification Trying to connect
-        | #{/unless}
-        | #{#each notifications}
-        div.notification
-          a(class="btn-primary js-notification-action") #{action}
-          div.title-notification #{title}
-        | #{/each}
+        unless connected
+          div.notification
+            span.icon-sync
+            div.title-notification Trying to connect
+        each notifications
+          div.notification
+            a(class="btn-primary js-notification-action") #{action}
+            div.title-notification #{title}
 
     +overlay
 

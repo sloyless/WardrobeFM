@@ -1,6 +1,6 @@
 template(name="home")
   div(class="page home")
-    +nav title='Wardrobe.FM' black=false
+    +nav(title='Wardrobe.FM' black=false)
 
     div.content-scrollable
       div(class="bg-image home")
@@ -26,12 +26,12 @@ template(name="home")
           div.wrapper-message
             div.title-message No one is cooking yet!
             div.subtitle-message Share that you made a recipe and it will show up here.
-      a.btn-primary(href="#{pathFor 'feed'}") See other posts
+      a.btn-primary(href="{{pathFor 'feed'}}") See other posts
 
       h2.list-title Our Favorite Recipes
       div.list-subtitle Hand-picked by neighborhood chefs
       div.list-recipes
         each featuredRecipes
-          +recipeItem recipe=this size='small'
+          +recipeItem(recipe=this size='small')
 
-      a.btn-primary(href="#{pathFor 'recipes'}") Explore all our recipes
+      a.btn-primary(href="{{pathFor 'recipes'}}") Explore all our recipes

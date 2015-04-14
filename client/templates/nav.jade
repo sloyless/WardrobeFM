@@ -1,13 +1,12 @@
 template(name="nav")
-  nav(class="#{#if black}black#{/if}")
+  nav(class="{{#if black}}black{{/if}}")
     div.nav-group
-      | #{#if back}
-      a(class="nav-item js-back" href="#")
-        span.icon-arrow-left-alt
-      | #{else}
-      a(class="nav-item js-menu" href="#")
-        span.icon-menu
-      | #{/if}
+      if back
+        a(class="nav-item js-back" href="#")
+          span.icon-arrow-left-alt
+      else
+        a(class="nav-item js-menu" href="#")
+          span.icon-menu
 
     div.title-page
       | #{title}

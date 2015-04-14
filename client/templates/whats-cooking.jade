@@ -1,26 +1,16 @@
-<template name="feed">
-  <div class="page whats-cooking">
-
-    {{>nav title="What's Cooking"}}
-
-    <div class="content-scrollable">
-      <div class="list-activities {{#unless ready}}loading{{/unless}}">
-        {{#if ready}}
-          {{#each activities}}
-            {{> activity}}
-          {{else}}
-            <div class="wrapper-message">
-              <div class="title-message">No one is cooking yet!</div>
-              <div class="subtitle-message">Share that you made a recipe and it will show up here.</div>
-            </div>
-          {{/each}}
-        {{else}}
-          <div class="wrapper-message">
-            <div class="icon-sync"></div>
-            <div class="title-message">Loading</div>
-          </div>
-        {{/if}}
-      </div>
-    </div>
-  </div>
-</template>
+template(name="feed")
+  div(class="page whats-cooking")
+    +nav title="What's Cooking"
+    div.content-scrollable
+      div(class="list-activities {{#unless ready}}loading{{/unless}}")
+        if ready
+          each activities
+            +activity
+          else
+            div.wrapper-message
+              div.title-message No one is cooking yet!
+              div.subtitle-message Share that you made a recipe and it will show up here.
+        else
+          div.wrapper-message
+            div.icon-sync
+            div.title-message Loading

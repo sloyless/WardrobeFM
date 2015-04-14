@@ -4,16 +4,14 @@ template(name="admin")
       span.icon-arrow-left-alt
       | Back
     div.wrapper-admin
-      | #{#if isAdmin}
-      h1.title-admin Admin
-      form
-        label Edit the front page news:
-        textarea(name="text" rows="5" placeholder="Show the latest Local Market news on the the frontpage...") #{latestNews.text}
-        button.btn-primary(type="submit") Save
-      | #{else}
-      h1.title-admin Forbidden
+      if isAdmin
+        h1.title-admin Admin
+        form
+          label Edit the front page news:
+          textarea(name="text" rows="5" placeholder="Show the latest Local Market news on the the frontpage...") #{latestNews.text}
+          button.btn-primary(type="submit") Save
+      else
+        h1.title-admin Forbidden
 
-      | #{#unless currentUser}
-      a.login Log in with Twitter
-      | #{/unless}
-      | #{/if}
+        unless currentUser
+          a.login Log in with Twitter

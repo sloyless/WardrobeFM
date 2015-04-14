@@ -1,57 +1,50 @@
-<template name="shareOverlay">
-  {{#if currentUser}}
-    <div class="overlay share">
+template(name="shareOverlay")
+  if currentUser
+    div(class="overlay share")
+      unless attachedImage
+        a(href="#" class="js-close-overlay overlay-dismiss")
+          span.icon-cross
+        div.wrapper-heading
+          div.title-overlay Share
+          div.subtitle-overlay Share this post with the WardrobeFM community.
 
-      {{#unless attachedImage}}
-        <a href="#" class="js-close-overlay overlay-dismiss"><span class="icon-cross"></span></a>
-        <div class="wrapper-heading">
-          <div class="title-overlay">Share</div>
-          <div class="subtitle-overlay">Share that you made this recipe with the Local Market community.</div>
-        </div>
+        div.wrapper-camera
+          a(class="js-attach-image btn-camera")
+            span.icon-camera
+          div.subtext-camera Add your photo
+      else
+        a(href="#" class="js-unattach-image overlay-back")
+          span.icon-arrow-left-alt
+        div.title-page Share
+        a(href="#" class="js-close-overlay overlay-dismiss")
+          span.icon-cross
 
-        <div class="wrapper-camera">
-          <a class="js-attach-image btn-camera"><span class="icon-camera"></span></a>
-          <div class="subtext-camera">Add your photo</div>
-        </div>
-      {{else}}
-        <a href="#" class="js-unattach-image overlay-back"><span class="icon-arrow-left-alt"></span></a>
-        <div class="title-page">Share</div>
-        <a href="#" class="js-close-overlay overlay-dismiss"><span class="icon-cross"></span></a>
+        div.bg-image(style="background-image: url('{{attachedImage}}')")
 
-        <div class="bg-image" style="background-image: url('{{attachedImage}}')"></div>
+        form.form-share
+          div.form-group
+            div.avatar
+              img.image-avatar(src="{{avatar}}")
 
-        <form class="form-share">
-          <div class="form-group">
-            <div class="avatar">
-              <img src="{{avatar}}" class="image-avatar">
-            </div>
+            textarea.message-share(
+              name="text" 
+              type="text" 
+              autocapitalize="off" 
+              autocorrect="off" 
+              required 
+              maxlength="140" 
+              placeholder="Add advice, suggestions, or thoughts to share with the community..."
+            )
 
-            <textarea name="text" type="text"
-              autocapitalize="off" autocorrect="off"
-              required maxlength="140"
-              class="message-share"
-              placeholder="Add advice, suggestions, or thoughts to share with the community..."></textarea>
-          </div>
+          div.wrapper-checkbox
+            label.checkbox(for="tweeting")
+              input(type="checkbox" name="tweeting" id="tweeting" checked)
+              span Post to Twitter
 
-          <div class="wrapper-checkbox">
-            <label for="tweeting" class="checkbox">
-              <input type="checkbox" name="tweeting" id="tweeting" checked>
-              <span>Post to Twitter</span>
-            </label>
-          </div>
-
-          <button class="btn-primary" type='submit'>
-            {{#if tweeting}}
-              Share &amp; Tweet
-            {{else}}
-              Share
-            {{/if}}
-          </button>
-        </form>
-      {{/unless}}
-
-    </div>
-  {{else}}
-    {{> authOverlay}}
-  {{/if}}
-</template>
+          button.btn-primary(type='submit')
+            if tweeting
+              | Share &amp; Tweet
+            else
+              | Share
+  else
+    +authOverlay
