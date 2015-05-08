@@ -1,16 +1,15 @@
 template(name="recipe")
 
   div(class="page recipe {{activeTabClass}}")
-    | #{#nav title='Recipe' black=true back=true}
-    if bookmarked
-      a(href="#" class="nav-item js-remove-bookmark bookmarked")
-        span.icon-bookmark
-    else
-      a(href="#" class="nav-item js-add-bookmark")
-        span.icon-bookmark-hollow
-    a(href="#" class="nav-item js-share")
-      span.icon-camera
-    | #{/nav}
+    +nav(title='Recipe' black="true" back="true")
+      if bookmarked
+        a(href="#" class="nav-item js-remove-bookmark bookmarked")
+          span.icon-bookmark
+      else
+        a(href="#" class="nav-item js-add-bookmark")
+          span.icon-bookmark-hollow
+      a(href="#" class="nav-item js-share")
+        span.icon-camera
 
     div.image-recipe(style="background-image: url('{{recipeImage recipe=this size='full'}}')")
 

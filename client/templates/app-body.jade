@@ -42,15 +42,15 @@ template(name="appBody")
           span.icon-question
           span.title-menu About
 
-      div.notifications
-        unless connected
-          div.notification
-            span.icon-sync
-            div.title-notification Trying to connect
-        each notifications
-          div.notification
-            a(class="btn-primary js-notification-action") #{action}
-            div.title-notification #{title}
+    div.notifications
+      unless connected
+        div.notification
+          span.icon-sync
+          div.title-notification Trying to connect
+      each notifications
+        div.notification
+          a(class="btn-primary js-notification-action") #{action}
+          div.title-notification #{title}
 
     +overlay
 
