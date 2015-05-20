@@ -1,7 +1,7 @@
 # WardrobeFM 1.0 (WIP)
 Your music. Your fashion.
 
-Meteor/Compass/Coffeescript/Sass
+Meteor/Compass/Coffeescript/Sass/Jade
 
 Project started on 6/12/2013
 
