@@ -11,10 +11,10 @@ Project started on 6/12/2013
 * run 'meteor'
 
 ## Changelog
-Update 4/2/2015
+**Update 4/2/2015**
 Scrapped the whole thing and started over with Meteor! 
 
-Update 1/15/2015
+**Update 1/15/2015**
 New year, New code.
 I've learned so much since 2013, and wanted to put it into practice.
 
