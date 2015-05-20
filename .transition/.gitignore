@@ -1,8 +1,0 @@
-.sass-cache/*
-*.scssc
-*.sassc
-.DS_Store
-*.DS_Store
-dist
-node_modules
-npm-debug.log
