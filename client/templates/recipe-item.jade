@@ -1,0 +1,11 @@
+template(name="recipeItem")
+  a(class="item-recipe {{highlightedClass}}" href="{{path}}")
+    with recipe
+      span.attribution
+        span.title-recipe #{title}
+        span.metadata-recipe 
+          span.author-recipe #{source.name}
+          span.bookmarks-recipe 
+            span.icon-bookmark
+            | #{bookmarkCount}
+    img(src="{{recipeImage recipe=recipe size=size}}")

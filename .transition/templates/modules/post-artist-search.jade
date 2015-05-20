@@ -1,0 +1,46 @@
+div(data-module="post-artist-search")
+  form(
+    id="searchform" 
+    name="searchform" 
+    ng-submit="postArtists.addArtist()"
+  )
+    div(id="post-text-container" ng-class="{ 'hidden': ! showTextContainer }")
+      label.visuallyhidden(for="post-text") Enter a caption
+      input(
+        type="text" 
+        name="post-text"
+        id="post-text"
+        placeholder="Enter a caption" 
+        autocomplete="off"
+        ng-model="postContent.postCaption.text"
+      )
+    div(id="post-artist-search")
+      label.visuallyhidden(for="artistsearch") Who is inspiring you today?
+      input(
+        type="text" 
+        name="artistsearch"
+        id="artistsearch"
+        placeholder="Who is inspiring you today?" 
+        autocomplete="off" 
+        autofocus 
+        required
+        ng-model="postArtists.text"
+      )
+    
+      include post-artist-tags
+
+    div(id="post-photo-container" ng-class="{ 'hidden': ! showPhotoContainer }")
+    div(id="post-video-container" ng-class="{ 'hidden': ! showVideoContainer }")
+    div(id="post-tag-container" ng-class="{ 'hidden': ! showTagContainer }")
+    div(id="post-artist-meta")
+      button(type="submit") Submit
+
+      ul(class="post-types nolist")
+        li
+            a.post-photo(ng-click="showPhotoContainer = ! showPhotoContainer")
+        li
+            a.post-video(ng-click="showVideoContainer = ! showVideoContainer")
+        li
+            a.post-text-post(ng-click="showTextContainer = ! showTextContainer")
+        li
+            a.post-tag-friend(ng-click="showTagContainer = ! showTagContainer")
