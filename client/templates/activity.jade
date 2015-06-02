@@ -4,11 +4,10 @@ template(name="activity")
       span.avatar
         img.image-avatar(src="{{userAvatar}}")
       span.meta
-        span.author #{firstName}
-        | made 
-        span.recipe #{recipeTitle}
-        | : #{text}
-        if place
-          span.location &mdash;#{place}
+        span.author #{userName}
+        span.date #{postDate} 
 
-    div.bg-image(style="background-image: url('{{image}}');")
+    .bg-image(style="background-image: url('{{image}}');")
+    span.attribution
+      span.meta
+        p #{text}

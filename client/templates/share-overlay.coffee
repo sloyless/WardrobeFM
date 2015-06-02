@@ -16,7 +16,7 @@ Template.shareOverlay.helpers
 
 Template.shareOverlay.events
   'click .js-attach-image': ->
-    MeteorCamera.getPicture { width: 320 }, (error, data) ->
+    MeteorCamera.getPicture { width: 280 }, (error, data) ->
       if error
         alert error.reason
       else
@@ -39,10 +39,9 @@ Template.shareOverlay.events
     tweet = Session.get(TWEETING_KEY)
     
     Meteor.call 'createActivity', {
-      recipeName: self.name
       text: text
       image: Session.get(IMAGE_KEY)
-    }, tweet, Geolocation.currentLocation(), (error, result) ->
+    }, tweet, (error, result) ->
       if error
         alert error.reason
       else
@@ -50,8 +49,6 @@ Template.shareOverlay.events
           action: 'View'
           title: 'Your photo was shared.'
           callback: ->
-            Router.go 'recipe', { name: self.name }, query: activityId: result
-            Template.recipe.setTab 'feed'
             return
       return
       
