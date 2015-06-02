@@ -27,11 +27,3 @@ template(name="home")
             div.title-message No one is inspired yet!
             div.subtitle-message Share some inspiration and it will show up here.
       a.btn-primary(href="{{pathFor 'feed'}}") See other posts
-
-      h2.list-title Our Favorite Inspiration
-      div.list-subtitle Hand-picked by WardrobeFM admins
-      div.list-recipes
-        each featuredRecipes
-          +recipeItem(recipe=this size='small')
-
-      a.btn-primary(href="{{pathFor 'recipes'}}") Explore all inspiration

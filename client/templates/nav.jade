@@ -13,4 +13,11 @@ template(name="nav")
       span.subtext-page #{subtext}
 
     div(class="nav-group right")
-      +Template.contentBlock
+      if bookmarked
+        a(href="#" class="nav-item js-remove-bookmark bookmarked")
+          span.icon-bookmark
+      else
+        a(href="#" class="nav-item js-add-bookmark")
+          span.icon-bookmark-hollow
+      a(href="#" class="nav-item js-share")
+        span.icon-camera

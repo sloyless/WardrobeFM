@@ -1,5 +1,5 @@
 # WardrobeFM 1.0 (WIP)
-Your music. Your fashion.
+Your music. Your style. Your inspiration. WardrobeFM is a project created by Sean and Sabrina Loyless to meld together music and photos into one seamless app experience highlighting inspiration drawn from music in people's lives.
 
 Meteor/Compass/Coffeescript/Sass/Jade
 
