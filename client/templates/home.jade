@@ -3,6 +3,9 @@ template(name="home")
     +nav(title='Wardrobe.FM' black=false)
 
     div.content-scrollable
+      div.callout-news
+        span.title-callout News
+        | #{latestNews.text}
       div(class="bg-image home")
         h1.title-home
           img(src="img/app/logo.png" alt="Wardrobe.FM")
@@ -12,10 +15,6 @@ template(name="home")
           | Your&nbsp;&nbsp; 
           span.title-callout Inspiration.
         span.arrow
-
-      div.callout-news
-        span.title-callout News
-        | #{latestNews.text}
 
       h2.list-title Recent Inspiration
       div.list-subtitle See what everyone else is inspired by today.

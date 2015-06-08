@@ -12,8 +12,6 @@ Template.activity.helpers
   userName: ->
     @userName
   postDate: ->
-    @date
-  recipeTitle: ->
-    RecipesData[@recipeName].title
+    moment(@date).calendar()
   path: ->
     Router.path 'recipe', { name: @recipeName }, query: activityId: @_id
